@@ -3,6 +3,7 @@ import { Settings, Code2, GitBranch, Zap, Database, Terminal } from 'lucide-reac
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../components/ui/card'
 import { Badge } from '../components/ui/badge'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '../components/ui/tabs'
+import { useLanguage } from '../contexts/LanguageContext'
 
 interface Technology {
   name: string
@@ -22,6 +23,7 @@ interface WebsiteContent {
 
 export function TechnologyPage() {
   const [content, setContent] = useState<WebsiteContent | null>(null)
+  const { language, t } = useLanguage()
 
   useEffect(() => {
     fetch('/data/agile_chip_website_content.json')
@@ -156,16 +158,16 @@ export function TechnologyPage() {
         <div className="text-center mb-16">
           <div className="inline-flex items-center px-4 py-2 rounded-full bg-blue-900/30 border border-blue-700/50 text-blue-300 text-sm font-medium mb-6">
             <Settings className="h-4 w-4 mr-2" />
-            核心技术
+            {t('technology.hero_tag')}
           </div>
           <h1 className="text-4xl lg:text-5xl font-bold text-white mb-6">
-            技术
+            {t('technology.hero_title')}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-400">
-              工具链
+              {t('technology.hero_subtitle')}
             </span>
           </h1>
           <p className="text-xl text-gray-300 max-w-4xl mx-auto leading-relaxed">
-            深入了解敏捷芯片开发所依托的现代化技术栈，从高级硬件描述语言到自动化工具链的完整生态系统。
+            {t('technology.intro')}
           </p>
         </div>
 
@@ -173,9 +175,9 @@ export function TechnologyPage() {
         <section className="mb-20">
           <Tabs defaultValue="tools" className="w-full">
             <TabsList className="grid w-full grid-cols-3 mb-8 bg-slate-800">
-              <TabsTrigger value="tools" className="data-[state=active]:bg-blue-600">核心工具</TabsTrigger>
-              <TabsTrigger value="workflow" className="data-[state=active]:bg-blue-600">开发流程</TabsTrigger>
-              <TabsTrigger value="practices" className="data-[state=active]:bg-blue-600">最佳实践</TabsTrigger>
+              <TabsTrigger value="tools" className="data-[state=active]:bg-blue-600">{t('technology.tabs.tools')}</TabsTrigger>
+              <TabsTrigger value="workflow" className="data-[state=active]:bg-blue-600">{t('technology.tabs.workflow')}</TabsTrigger>
+              <TabsTrigger value="practices" className="data-[state=active]:bg-blue-600">{t('technology.tabs.practices')}</TabsTrigger>
             </TabsList>
 
             <TabsContent value="tools" className="space-y-8">
@@ -295,7 +297,7 @@ export function TechnologyPage() {
         {/* Technology Stack Visualization */}
         <section className="mb-20">
           <h2 className="text-3xl font-bold text-white mb-12 text-center">
-            技术栈架构
+            {t('technology.tech_stack_title')}
           </h2>
           
           <div className="relative">
@@ -309,18 +311,18 @@ export function TechnologyPage() {
             {/* Technology Layers */}
             <div className="absolute inset-0 flex items-center justify-center">
               <div className="text-center space-y-4">
-                <h3 className="text-3xl font-bold text-white mb-6">分层技术架构</h3>
+                <h3 className="text-3xl font-bold text-white mb-6">{t('technology.tech_stack_title')}</h3>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-4xl">
                   <div className="bg-blue-900/70 backdrop-blur-sm rounded-lg p-4 border border-blue-600/50">
-                    <h4 className="text-white font-semibold mb-2">开发层</h4>
+                    <h4 className="text-white font-semibold mb-2">{t('technology.tech_stack_layer.0')}</h4>
                     <p className="text-blue-200 text-sm">Chisel, Python, HDL</p>
                   </div>
                   <div className="bg-blue-900/70 backdrop-blur-sm rounded-lg p-4 border border-blue-600/50">
-                    <h4 className="text-white font-semibold mb-2">工具层</h4>
+                    <h4 className="text-white font-semibold mb-2">{t('technology.tech_stack_layer.1')}</h4>
                     <p className="text-blue-200 text-sm">Git, CI/CD, 仿真</p>
                   </div>
                   <div className="bg-blue-900/70 backdrop-blur-sm rounded-lg p-4 border border-blue-600/50">
-                    <h4 className="text-white font-semibold mb-2">实现层</h4>
+                    <h4 className="text-white font-semibold mb-2">{t('technology.tech_stack_layer.2')}</h4>
                     <p className="text-blue-200 text-sm">EDA, 综合, 布局</p>
                   </div>
                 </div>
@@ -334,11 +336,10 @@ export function TechnologyPage() {
           <div className="text-center">
             <Code2 className="h-16 w-16 text-blue-400 mx-auto mb-6" />
             <h2 className="text-3xl font-bold text-white mb-6">
-              未来技术趋势
+              {t('technology.future_title')}
             </h2>
             <p className="text-xl text-gray-300 max-w-4xl mx-auto leading-relaxed mb-8">
-              随着AI技术的发展，机器学习将深度融入芯片设计流程，包括智能布局布线、自动化验证、
-              设计空间探索等领域。同时，云原生EDA工具和分布式计算将进一步提升开发效率。
+              {t('technology.future_desc')}
             </p>
             
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
@@ -346,22 +347,22 @@ export function TechnologyPage() {
                 <div className="w-12 h-12 bg-purple-600 rounded-full flex items-center justify-center mx-auto mb-3">
                   <span className="text-xl">🤖</span>
                 </div>
-                <h3 className="text-lg font-semibold text-white mb-2">AI辅助设计</h3>
-                <p className="text-gray-400 text-sm">机器学习优化设计流程</p>
+                <h3 className="text-lg font-semibold text-white mb-2">{t('technology.future.ai')}</h3>
+                <p className="text-gray-400 text-sm">{t('technology.future.ai_desc')}</p>
               </div>
               <div className="text-center">
                 <div className="w-12 h-12 bg-green-600 rounded-full flex items-center justify-center mx-auto mb-3">
                   <span className="text-xl">☁️</span>
                 </div>
-                <h3 className="text-lg font-semibold text-white mb-2">云原生EDA</h3>
-                <p className="text-gray-400 text-sm">弹性扩展的设计工具</p>
+                <h3 className="text-lg font-semibold text-white mb-2">{t('technology.future.cloud')}</h3>
+                <p className="text-gray-400 text-sm">{t('technology.future.cloud_desc')}</p>
               </div>
               <div className="text-center">
                 <div className="w-12 h-12 bg-orange-600 rounded-full flex items-center justify-center mx-auto mb-3">
                   <span className="text-xl">🔗</span>
                 </div>
-                <h3 className="text-lg font-semibold text-white mb-2">开放生态</h3>
-                <p className="text-gray-400 text-sm">标准化的协作平台</p>
+                <h3 className="text-lg font-semibold text-white mb-2">{t('technology.future.open')}</h3>
+                <p className="text-gray-400 text-sm">{t('technology.future.open_desc')}</p>
               </div>
             </div>
           </div>

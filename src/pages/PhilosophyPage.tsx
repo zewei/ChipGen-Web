@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { BookOpen, Target, Users, Code, RefreshCw } from 'lucide-react'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../components/ui/card'
 import { Badge } from '../components/ui/badge'
+import { useLanguage } from '../contexts/LanguageContext'
 
 interface PhilosophySection {
   id: string
@@ -19,6 +20,7 @@ interface WebsiteContent {
 
 export function PhilosophyPage() {
   const [content, setContent] = useState<WebsiteContent | null>(null)
+  const { language, t } = useLanguage()
 
   useEffect(() => {
     fetch('/data/agile_chip_website_content.json')
@@ -29,51 +31,24 @@ export function PhilosophyPage() {
 
   const philosophySection = content?.sections.find(section => section.id === 'philosophy')
 
-  const principles = [
-    {
-      icon: <Target className="h-8 w-8 text-blue-400" />,
-      title: "可工作的原型优于全面的文档",
-      description: "注重快速构建可验证的硬件原型，而非完美的设计文档"
-    },
-    {
-      icon: <Users className="h-8 w-8 text-blue-400" />,
-      title: "协作灵活的团队优于僵化的孤岛",
-      description: "打破传统部门壁垒，建立跨学科协作的敏捷团队"
-    },
-    {
-      icon: <Code className="h-8 w-8 text-blue-400" />,
-      title: "改进工具和生成器优于改进实例",
-      description: "投资于开发工具和自动化，提高整体开发效率"
-    },
-    {
-      icon: <RefreshCw className="h-8 w-8 text-blue-400" />,
-      title: "响应变化优于遵循计划",
-      description: "保持灵活性，能够快速适应需求变化和技术发展"
-    }
-  ]
+  const principles = [0, 1, 2, 3].map(i => ({
+    icon: [<Target className="h-8 w-8 text-blue-400" />, <Users className="h-8 w-8 text-blue-400" />, <Code className="h-8 w-8 text-blue-400" />, <RefreshCw className="h-8 w-8 text-blue-400" />][i],
+    title: t(`philosophy.principle.${i}.title`),
+    description: t(`philosophy.principle.${i}.desc`)
+  }))
 
-  const methodologies = [
-    {
-      name: "Scrum for Hardware",
-      description: "将Scrum框架应用于硬件开发",
-      color: "bg-blue-500"
-    },
-    {
-      name: "测试驱动开发",
-      description: "TDD方法在硬件设计中的应用",
-      color: "bg-green-500"
-    },
-    {
-      name: "持续集成/验证",
-      description: "CI/CV在芯片开发中的实践",
-      color: "bg-purple-500"
-    },
-    {
-      name: "模型驱动开发",
-      description: "MDD提高设计抽象层次",
-      color: "bg-orange-500"
-    }
-  ]
+  const methodologies = [0, 1, 2, 3].map(i => ({
+    name: t(`philosophy.method.${i}.name`),
+    description: t(`philosophy.method.${i}.desc`),
+    color: ["bg-blue-500", "bg-green-500", "bg-purple-500", "bg-orange-500"][i]
+  }))
+
+  const benefits = [0, 1, 2].map(i => ({
+    icon: [<span className="text-2xl font-bold text-white">⚡</span>, <span className="text-2xl font-bold text-white">🎯</span>, <span className="text-2xl font-bold text-white">🚀</span>][i],
+    color: ["bg-blue-600", "bg-green-600", "bg-purple-600"][i],
+    title: t(`philosophy.benefit.${i}.title`),
+    desc: t(`philosophy.benefit.${i}.desc`)
+  }))
 
   return (
     <div className="min-h-screen py-12">
@@ -82,16 +57,16 @@ export function PhilosophyPage() {
         <div className="text-center mb-16">
           <div className="inline-flex items-center px-4 py-2 rounded-full bg-blue-900/30 border border-blue-700/50 text-blue-300 text-sm font-medium mb-6">
             <BookOpen className="h-4 w-4 mr-2" />
-            核心理念与方法论
+            {t('philosophy.hero_tag')}
           </div>
           <h1 className="text-4xl lg:text-5xl font-bold text-white mb-6">
-            敏捷芯片开发
+            {t('philosophy.hero_title')}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-400">
-              核心理念
+              {t('philosophy.hero_subtitle')}
             </span>
           </h1>
           <p className="text-xl text-gray-300 max-w-4xl mx-auto leading-relaxed">
-            {philosophySection?.content || "敏捷芯片开发借鉴了软件工程的敏捷思想，旨在应对传统芯片开发模式的挑战。"}
+            {philosophySection?.content || t('philosophy.intro')}
           </p>
         </div>
 
@@ -110,7 +85,7 @@ export function PhilosophyPage() {
         {/* Agile Hardware Manifesto */}
         <section className="mb-20">
           <h2 className="text-3xl font-bold text-white mb-8 text-center">
-            敏捷硬件宣言
+            {t('philosophy.manifesto_title')}
           </h2>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             {principles.map((principle, index) => (
@@ -138,7 +113,7 @@ export function PhilosophyPage() {
         {/* Methodologies Section */}
         <section className="mb-20">
           <h2 className="text-3xl font-bold text-white mb-8 text-center">
-            关键方法论
+            {t('philosophy.methodologies_title')}
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
             {methodologies.map((methodology, index) => (
@@ -177,36 +152,20 @@ export function PhilosophyPage() {
         {/* Benefits Section */}
         <section className="bg-gradient-to-r from-blue-900/20 to-slate-800/20 rounded-2xl p-8 lg:p-12">
           <h2 className="text-3xl font-bold text-white mb-8 text-center">
-            敏捷方法的优势
+            {t('philosophy.benefits_title')}
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="text-center">
-              <div className="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
-                <span className="text-2xl font-bold text-white">⚡</span>
+            {benefits.map((benefit, index) => (
+              <div className="text-center" key={index}>
+                <div className={`w-16 h-16 ${benefit.color} rounded-full flex items-center justify-center mx-auto mb-4`}>
+                  {benefit.icon}
+                </div>
+                <h3 className="text-xl font-semibold text-white mb-2">{benefit.title}</h3>
+                <p className="text-gray-300">
+                  {benefit.desc}
+                </p>
               </div>
-              <h3 className="text-xl font-semibold text-white mb-2">提高效率</h3>
-              <p className="text-gray-300">
-                通过短周期迭代和快速反馈，大幅缩短开发周期
-              </p>
-            </div>
-            <div className="text-center">
-              <div className="w-16 h-16 bg-green-600 rounded-full flex items-center justify-center mx-auto mb-4">
-                <span className="text-2xl font-bold text-white">🎯</span>
-              </div>
-              <h3 className="text-xl font-semibold text-white mb-2">降低风险</h3>
-              <p className="text-gray-300">
-                早期验证和持续测试，及时发现和解决问题
-              </p>
-            </div>
-            <div className="text-center">
-              <div className="w-16 h-16 bg-purple-600 rounded-full flex items-center justify-center mx-auto mb-4">
-                <span className="text-2xl font-bold text-white">🚀</span>
-              </div>
-              <h3 className="text-xl font-semibold text-white mb-2">增强创新</h3>
-              <p className="text-gray-300">
-                灵活响应变化，促进创新思维和技术探索
-              </p>
-            </div>
+            ))}
           </div>
         </section>
       </div>
