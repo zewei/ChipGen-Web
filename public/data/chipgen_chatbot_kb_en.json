@@ -1,0 +1,48 @@
+{
+  "name": "ChipGen Knowledge Base",
+  "version": "1.0",
+  "domain": "Agile Chip Development",
+  "language": "en-US",
+  "qa_pairs": [
+    {
+      "question": "What is agile chip development?",
+      "answer": "Agile chip development is a methodology that adapts agile software engineering principles for hardware design. It emphasizes rapid iteration, close collaboration, continuous validation, and high automation to address traditional challenges of long development cycles, high costs, and difficulty adapting to changing requirements. The core goal is to deliver high-quality chips faster and more flexibly."
+    },
+    {
+      "question": "What are the core principles of agile chip development?",
+      "answer": "The core principles are based on the 'Agile Hardware Manifesto' with four key aspects: 1. Working prototypes over comprehensive documentation; 2. Collaborative flexible teams over rigid silos; 3. Improving tools and generators over improving instances; 4. Responding to change over following plans."
+    },
+    {
+      "question": "How does agile development differ from traditional chip development?",
+      "answer": "The main difference lies in process models and attitude toward change. Traditional development uses 'waterfall model' with fixed stages from requirements, design, verification to tapeout in linear sequence, difficult to backtrack. Agile development uses 'iterative model', breaking large projects into multiple short cycles (Sprints), each producing testable prototypes, enabling more flexible response to changes and direction adjustments."
+    },
+    {
+      "question": "What is RISC-V's role in agile development?",
+      "answer": "RISC-V is an important open-source instruction set architecture promoting agile chip development. Its open nature, modular design, and community-driven development align perfectly with agile principles. RISC-V enables rapid prototyping, collaborative development, and iterative improvements in processor design."
+    },
+    {
+      "question": "How does Xiangshan processor apply agile methods?",
+      "answer": "Xiangshan processor by Institute of Computing Technology, CAS, is a high-performance processor based on RISC-V architecture using agile development methodology. It achieves rapid iteration and validation through Chisel hardware description language, Git version control, continuous integration, and other tools, demonstrating successful application of agile methods in complex processor design."
+    },
+    {
+      "question": "What are the core tools for agile hardware development?",
+      "answer": "Agile chip development uses modern toolchains: 1) Chisel/FIRRTL for high-level hardware description; 2) Git for version control and collaboration; 3) Jenkins/GitLab CI for continuous integration; 4) Docker for environment consistency; 5) Verilator and other tools for rapid simulation and verification. These tools support automated, repeatable development workflows."
+    },
+    {
+      "question": "What are the advantages of agile chip development?",
+      "answer": "Key advantages include: 1) Faster time-to-market through iterative development; 2) Better quality through continuous validation; 3) Improved team collaboration and communication; 4) Greater flexibility to adapt to changing requirements; 5) Reduced development risks through early prototyping; 6) Enhanced innovation through rapid experimentation."
+    },
+    {
+      "question": "What is SoC design?",
+      "answer": "SoC (System-on-Chip) integrates complete system functionality on a single chip. In agile development, SoC design adopts modular, reusable IP components supporting parallel development and rapid prototype validation. Key characteristics include: 1) System-level design; 2) IP reuse; 3) Parallel development; 4) Rapid verification; 5) Continuous integration."
+    },
+    {
+      "question": "What are successful agile chip development projects?",
+      "answer": "Notable success cases include: 1) Xiangshan processor - RISC-V based high-performance processor using Chisel and agile methods; 2) Berkeley RISC-V - Pioneering open-source processor architecture; 3) OpenPiton - Open-source manycore research processor; 4) ESP platform - Agile SoC design platform. These projects demonstrate the effectiveness of agile methodologies in chip development."
+    },
+    {
+      "question": "How to get started with agile chip development?",
+      "answer": "To begin: 1) Learn agile hardware manifesto principles; 2) Master modern tools like Chisel, FIRRTL, and RISC-V; 3) Understand iterative development and continuous integration practices; 4) Study successful open-source projects; 5) Join the agile hardware development community; 6) Start with small prototypes and gradually scale up complexity."
+    }
+  ]
+}

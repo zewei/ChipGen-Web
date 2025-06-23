@@ -1,0 +1,88 @@
+
+{
+  "title": "敏捷芯片开发知识库",
+  "introduction": "一个旨在全面介绍敏捷芯片开发理念、历史、关键项目与技术的知识中心。",
+  "sections": [
+    {
+      "id": "philosophy",
+      "title": "核心理念与方法论",
+      "content": "敏捷芯片开发借鉴了软件工程的敏捷思想，旨在应对传统芯片开发模式（如瀑布模型）周期长、成本高、难以适应需求变化等挑战。其核心理念根植于“敏捷硬件宣言”，强调“可工作的原型优于全面的文档”、“协作灵活的团队优于僵化的孤岛”、“改进工具和生成器优于改进实例”以及“响应变化优于遵循计划”。",
+      "subsections": [
+        {
+          "title": "Scrum for Hardware",
+          "content": "将Scrum框架应用于硬件开发，通过设定短周期的“Sprint”（通常为2-4周），进行迭代规划、每日站会、评审和回顾，以管理复杂的开发流程。"
+        },
+        {
+          "title": "测试驱动开发 (TDD)",
+          "content": "在编写RTL代码之前，先编写测试用例。这在硬件中通常通过高层建模语言（如Chisel, SystemC）实现，确保设计从一开始就具备可测试性，并持续进行验证。"
+        },
+        {
+          "title": "持续集成/持续验证 (CI/CV)",
+          "content": "建立自动化的工作流，每当有新的代码提交到版本库时，自动触发编译、仿真、静态检查甚至逻辑综合，实现快速反馈和早期错误发现。"
+        },
+        {
+          "title": "模型驱动开发 (MDD)",
+          "content": "使用更高层次的语言（如Chisel, Python）来描述硬件，然后通过代码生成器自动产生底层的Verilog/VHDL代码。这种方法提高了设计的抽象层次，增强了代码的可重用性和可维护性。"
+        }
+      ]
+    },
+    {
+      "id": "history",
+      "title": "发展历史",
+      "content": "敏捷方法论虽然在21世纪初随着软件《敏捷宣言》的发布而正式化，但其应用于硬件领域的历史则更为近期，并呈现出独特的演进路径。",
+      "timeline": [
+        {
+          "year": "2001",
+          "event": "《敏捷宣言》发布，软件敏捷开发思想正式形成。"
+        },
+        {
+          "year": "2016",
+          "event": "加州大学伯克利分校提出“敏捷硬件宣言”，标志着敏捷理念开始系统性地应用于硬件开发领域。"
+        },
+        {
+          "year": "2010年代至今",
+          "event": "随着RISC-V、Chisel和开源EDA工具的兴起，敏捷芯片开发进入快速发展阶段，涌现出大量成功的开源项目和商业应用。"
+        }
+      ]
+    },
+    {
+      "id": "projects",
+      "title": "关键项目与技术",
+      "content": "敏捷芯片开发并非纸上谈兵，全球范围内已有多个成功的项目案例，它们采用了多种先进的技术和工具。",
+      "case_studies": [
+        {
+          "name": "“香山”处理器",
+          "organization": "中国科学院计算技术研究所",
+          "description": "一个开源的高性能RISC-V处理器项目，全面拥抱敏捷开发，利用Chisel和自研的“MinJie”敏捷开发平台，实现了高效的迭代开发。",
+          "url": "https://github.com/OpenXiangShan"
+        },
+        {
+          "name": "UC Berkeley RISC-V Projects (Rocket, BOOM)",
+          "organization": "加州大学伯克利分校",
+          "description": "作为敏捷硬件开发的摇篮，伯克利通过一系列基于RISC-V和Chisel的开源芯片项目，验证并推广了敏捷方法，并成功流片多款芯片。",
+          "url": "https://riscv.org/"
+        },
+        {
+          "name": "OpenPiton",
+          "organization": "普林斯顿大学",
+          "description": "一个开源、可扩展的多核处理器研究平台，利用Python脚本和FuseSoC等工具来管理复杂的IP核和设计流程，体现了敏捷开发中对自动化和模块化的高度重视。",
+          "url": "http://openpiton.org/"
+        },
+        {
+          "name": "ESP (Embedded Scalable Platforms)",
+          "organization": "哥伦比亚大学",
+          "description": "一个开源的异构SoC设计平台，通过图形化界面和集成工具流，实现了加速器IP的快速集成和SoC的敏捷开发。",
+          "url": "https://www.esp.cs.columbia.edu/"
+        }
+      ],
+      "key_technologies": [
+        {"name": "Chisel/FIRRTL", "category": "高级硬件构造语言"},
+        {"name": "Python (PyMTL, PyRTL)", "category": "脚本与自动化"},
+        {"name": "Git", "category": "版本控制"},
+        {"name": "Jenkins, GitLab CI", "category": "持续集成"},
+        {"name": "QEMU, KVM", "category": "虚拟化与仿真"},
+        {"name": "OpenROAD, Yosys", "category": "开源EDA"}
+      ]
+    }
+  ]
+}
