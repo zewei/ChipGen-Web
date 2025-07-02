@@ -1,0 +1,290 @@
+# YAML format SOC config file
+soc_name    : p0
+# tech to use: sim or any tech defined in the common_rtl/TECH
+tech        : nuclei
+# RAM to use: sim or any RAM defined in the common_rtl/TECH
+ram_model   : sim
+clocks:
+  hsi:
+    type         : rc
+    rc_type      : hsi
+    power_domain : sys
+    pmu_ctrl     : seq
+    pmu_order    : 0
+    pd_macro     : null
+    freq         : 16000000
+    fpga_freq    : 10000000
+    hsi_name     : hsi_wi_ldo_smic40
+  lse:
+    type         : xtal
+    xtal_type    : 2
+    tb_src       : aon_clk
+    power_domain : aond
+    pd_macro     : aond
+    freq         : 32768
+    fpga_freq    : 10000000
+  hse:
+    type         : xtal
+    xtal_type    : 1
+    tb_src       : hse_clk
+    power_domain : sys
+    pmu_ctrl     : seq
+    pmu_order    : 2
+    freq         : 16000000
+    fpga_freq    : 10000000
+    boot_off     : True
+  ddr_osc:
+    type         : xtal
+    xtal_type    : 1
+    tb_src       : hse_clk
+    power_domain : ddr_top0
+    freq         : 16000000
+    fpga_freq    : 250000000
+  lsi:
+    type        : rc
+    rc_type     : lsi
+    power_domain: aond
+    pd_macro    : aond
+    pmu_order   : 3
+    freq        : 32768
+    fpga_freq   : 10000000
+  ########################################################## aond clocks
+  hse_div_512_clk_d:
+    type         : generated
+    power_domain : aond
+    src          : [hse]
+    max_ratio    : 1
+    divider      : 10
+    divider_init : 511
+    divider_type : 1
+  aond_sys_clk_s:
+    type         : generated
+    power_domain : aond
+    src          : [hsi, hse]
+    freq         : 16000000
+  aond_sys_clk:
+    type         : generated
+    power_domain : aond
+    src          : [aond_sys_clk_s]
+    max_ratio    : 16
+    divider      : 6
+    divider_init : 15
+    divider_type : 0
+    test_clk_byp : 1
+  rtc_clk_s:
+    type         : generated
+    power_domain : aond
+    src          : [lsi, lse, hse_div_512_clk_d]
+    freq         : 32768
+  rtc_clk:
+    type         : generated
+    power_domain : aond
+    src          : [rtc_clk_s]
+    max_ratio    : 0
+    hand_buf     : 1
+  hsm_rtc_clk:
+    type         : generated
+    power_domain : hsm
+    src          : [rtc_clk_s]
+    max_ratio    : 0
+    hand_buf     : 1
+  clk_tmr_toggle_s:
+    type         : generated
+    power_domain : aond
+    src          : [lsi, lse, aond_sys_clk]
+    freq         : 32768
+
+  clk_tmr_toggle:
+    type         : generated
+    power_domain : aond
+    src          : [clk_tmr_toggle_s]
+    max_ratio    : 1
+    divider      : 8
+    divider_init : 0
+    divider_type : 0
+
+  lsi_i:
+    type         : generated
+    power_domain : aond
+    src          : [lsi]
+    max_ratio    : 0
+    hand_buf     : 1
+
+  ########################################################## pad clock and pll clock
+  clk_in1:
+    type         : internal
+    power_domain : sys
+    sql          : iomux_clk_in1_i_ival
+    freq         : 16000000
+
+  clk_in2:
+    type         : internal
+    power_domain : sys
+    sql          : iomux_clk_in2_i_ival
+    freq         : 16000000
+
+  clk_in3:
+    type         : internal
+    power_domain : sys
+    sql          : iomux_clk_in3_i_ival
+    freq         : 16000000
+
+  clk_in4:
+    type         : internal
+    power_domain : sys
+    sql          : iomux_clk_in4_i_ival
+    freq         : 16000000
+
+  sys_pll_clk_s:
+    type         : generated
+    power_domain : sys
+    src          : [hsi, hse, clk_in1, clk_in2]
+    freq         : 16000000
+
+  sys_pll_clk:
+    power_domain : sys
+    rcc_pd       : sys
+    type         : generated
+    pd_macro     : null
+    src          : [sys_pll_clk_s]
+    pll          : 100
+    pll_N        : 1
+    pll_od       : 2
+    pll_bp       : 1
+    pmu_ctrl     : seq
+    pmu_order    : 4
+    freq         : 400000000
+    fpga_freq    : 10000000
+    boot_off     : True
+
+  sys_pll_clk_div2:
+    type         : generated
+    power_domain : sys
+    src          : [sys_pll_clk]
+    max_ratio    : 2
+    divider      : 2
+    divider_init : 1
+    divider_type : 1
+
+  corel_pll_clk_s:
+    type         : generated
+    power_domain : sys
+    src          : [hsi, hse, clk_in1, clk_in2]
+    freq         : 16000000
+
+  corel_pll_clk:
+    power_domain : sys
+    type         : generated
+    rcc_pd       : sys
+    pd_macro     : null
+    src          : [corel_pll_clk_s]
+    pll          : 125
+    pll_N        : 2
+    pll_od       : 1
+    pll_bp       : 1
+    pmu_ctrl     : seq
+    pmu_order    : 5
+    freq         : 500000000
+    fpga_freq    : 10000000
+    boot_off     : True
+
+  xuc_pll_clk_s:
+    type         : generated
+    power_domain : sys
+    src          : [hsi, hse, clk_in1, clk_in2]
+    freq         : 16000000
+
+  xuc_pll_clk:
+    power_domain : sys
+    type         : generated
+    rcc_pd       : sys
+    pd_macro     : null
+    src          : [xuc_pll_clk_s]
+    pll          : 60
+    pll_N        : 1
+    pll_od       : 1
+    pll_bp       : 1
+    pmu_ctrl     : seq
+    pmu_order    : 6
+    freq         : 480000000
+    fpga_freq    : 10000000
+    boot_off     : True
+
+  ########################################################## test clk
+  sys_pll_div_32_clk_t:
+    type         : generated
+    power_domain : sys
+    src          : [sys_pll_clk]
+    max_ratio    : 32
+    divider      : 5
+    divider_init : 31
+    divider_type : 1
+    has_ctrl     : False
+    no_sdc       : 1
+
+  corel_pll_div_32_clk_t:
+    type         : generated
+    power_domain : sys
+    src          : [corel_pll_clk]
+    max_ratio    : 32
+    divider      : 5
+    divider_init : 31
+    divider_type : 1
+    has_ctrl     : False
+    no_sdc       : 1
+
+  xuc_pll_div_32_clk_t:
+    type         : generated
+    power_domain : sys
+    src          : [xuc_pll_clk]
+    max_ratio    : 32
+    divider      : 5
+
+  icb_div_32_clk_t:
+    type         : generated
+    power_domain : sys
+    src          : [sys_clk_buf]
+    max_ratio    : 32
+    divider      : 5
+    divider_init : 31
+    divider_type : 1
+    has_ctrl     : False
+    no_sdc       : 1
+
+  lsi_div_2_clk_t:
+    type         : generated
+    power_domain : aond
+    src          : [lsi]
+    max_ratio    : 2
+    divider      : 2
+    divider_init : 1
+    divider_type : 1
+    has_ctrl     : False
+    no_sdc       : 1
+
+  hsi_div_2_clk_t:
+    type         : generated
+    power_domain : sys
+    src          : [hsi]
+    max_ratio    : 2
+    divider      : 2
+    divider_init : 1
+    divider_type : 1
+    has_ctrl     : False
+    no_sdc       : 1
+
+########################################################## mux clk ##########################################################
+  sys_clk:
+    type         : generated
+    power_domain : sys
+    src          : [hsi, hse, sys_pll_clk, sys_pll_clk_div2, corel_pll_clk, xuc_pll_clk]
+    freq         : 200000000
+
+  sys_intf_clk:
+    type         : generated
+    power_domain : sys
+    src          : [hsi, hse, sys_pll_clk, sys_pll_clk_div2, corel_pll_clk, xuc_pll_clk]
+    freq         : 200000000
+
+  clusterl_clk:
+    type         : generated
