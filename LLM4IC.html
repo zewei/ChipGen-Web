@@ -1,0 +1,810 @@
+<em data-skywork="text_badge" data-sk-source-text="虽然CircuitLM和CircuitBench等工作已开始探索多模态模型，但如何有效融合不同模态的信息，实现真正的全方位电路理解，仍是一个挑战。" id="skTag-PYIXHN" class="sk-source-tag" data-sk-source-id="PYIXHN" ></em><!DOCTYPE html>
+
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>大语言模型在芯片研发领域的应用：现状、挑战与未来展望</title>
+<script src="https://static-recommend-img.tiangong.cn/router/agent/chart_0c881812ee9d48598f6fe7dbffb2e546.js"></script>
+<style>.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 24px 40px;
+    background-color: #fff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    }
+.chart-container {
+    position: relative;
+    margin: 3em auto;
+    max-width: 500px;
+    height: 400px;
+    overflow: visible;
+    aspect-ratio: 7/5;}
+img {
+    display: block;
+    overflow: hidden;
+    max-width: 100%;
+    max-height: 280px;
+    margin: 1em auto;
+    border-radius: 8px;
+    }
+h5 {
+    font-size: 16px;
+    }
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+    line-height: 1.8;
+    font-size: 16px;
+    color: #333;
+    background-color: #FFFEFC;
+    /* Slightly off-white for a softer look */
+    margin: 0 24px 0 24px;
+    padding: 0;
+    max-width: None;
+    }
+h1, h2, h3, h4 {
+    font-family: "Georgia", "Times New Roman", Times, serif;
+    /* Serif for headings for a more academic feel */
+    color: #1a1a1a;
+    margin-top: 24px;
+    /* More space above headings */
+    margin-bottom: 20px;
+    font-size: 28px;
+    }
+h1 {
+    font-size: 28px;
+    font-weight: 600;
+    /* Bolder H1 */
+    text-align: center;
+    border-bottom: 2px solid #eee;
+    /* Subtle separator */
+    padding-bottom: 0.5em;
+    margin-bottom: 20px;
+    margin-top: 24px;
+    }
+h2 {
+    font-size: 22px;
+    font-weight: 600;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 0.3em;
+    }
+h3 {
+    font-size: 20px;
+    font-weight: 600;
+    }
+h4 {
+    font-size: 18px;
+    font-weight: 600;
+    }
+p {
+    margin-bottom: 1.5em;
+    /* Increased paragraph spacing */
+    text-align: justify;
+    }
+a {
+    color: #07c;
+    /* A more standard blue for links */
+    text-decoration: none;
+    }
+a:hover {
+    text-decoration: underline;
+    }
+blockquote {
+    border-left: 4px solid #07c;
+    /* Accent color for blockquotes */
+    padding-left: 1em;
+    margin-left: 0;
+    margin-right: 0;
+    font-style: italic;
+    color: #555;
+    }
+ul, ol {
+    padding-left: 1.5em;
+    margin-bottom: 1.5em;
+    }
+li {
+    margin-bottom: 0.5em;
+    }
+.toc {
+    background-color: #f9f9f9;
+    border: 1px solid #e0e0e0;
+    padding: 15px 20px;
+    margin-bottom: 2em;
+    border-radius: 4px;
+    }
+.toc h3 {
+    margin-top: 0;
+    margin-bottom: 0.8em;
+    font-size: 1.4em;
+    color: #333;
+    border-bottom: none;
+    }
+.toc ul {
+    padding-left: 20px;
+    list-style-type: none;
+    /* Cleaner TOC list */
+    }
+.toc ul ul {
+    padding-left: 20px;
+    }
+.toc li a {
+    color: #333;
+    /* Darker TOC links for readability */
+    }
+.toc li a:hover {
+    color: #07c;
+    }
+.references {
+    margin-top: 3em;
+    padding-top: 1.5em;
+    border-top: 2px solid #eee;
+    }
+.references h2 {
+    border-bottom: none;
+    }
+.references ul {
+    list-style-type: none;
+    padding-left: 0;
+    }
+.references li {
+    margin-bottom: 0.8em;
+    padding-left: 1.5em;
+    text-indent: -1.5em;
+    /* Hanging indent for references */
+    }
+.key-points {
+    background-color: #eef7ff;
+    /* Light blue background for key points */
+    border: 1px solid #cce0ff;
+    padding: 15px 20px;
+    margin-top: 1.5em;
+    margin-bottom: 1.5em;
+    border-radius: 4px;
+    }
+.key-points h4 {
+    margin-top: 0;
+    color: #0056b3;
+    /* Darker blue for key points title */
+    border-bottom: none;
+    }
+figcaption {
+    text-align: center;
+    font-style: italic;
+    color: #555;
+    margin-top: 0.5em;
+    margin-bottom: 2em;
+    }
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 1.5em;
+    }
+th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+    }
+th {
+    background-color: #f2f2f2;
+    }
+        .chart-container canvas {
+            width: 100% !important;
+            height: 100% !important;
+            object-fit: contain;
+}
+
+@media only screen and (max-device-width: 768px) {
+            body {
+                padding: 0;
+                margin: 0;
+                font-family: PingFang SC;
+                font-size: 15px;
+                line-height: 1.5;
+            }
+
+            .container {
+                padding: 0;
+                margin: 16px 20px 30px;
+                box-shadow: none;
+            }
+
+            h1,
+            h2,
+            h3,
+            h4 {
+                font-family: PingFang SC;
+            }
+
+            h1 {
+                font-size: 1.87em;
+                line-height: 1.6;
+                margin-bottom: 0.5em;
+                text-align: center;
+            }
+
+            h2 {
+                font-size: 1.6em;
+                font-weight: 600;
+                margin-top: 1.3em;
+                margin-bottom: 0.8em;
+                border-bottom: 1px solid #eee;
+                padding-bottom: 0.5em;
+            }
+
+            h3 {
+                font-size: 1.2em;
+                font-weight: 600;
+                margin-top: 1em;
+                margin-bottom: 0.6em;
+            }
+
+            h4 {
+                font-size: 1.1em;
+                font-weight: 500;
+                margin-top: 1em;
+                margin-bottom: 0.5em;
+                font-style: normal;
+            }
+
+            h5 {
+                font-size: 1em;
+                font-weight: 500;
+                margin-bottom: 1.2em;
+            }
+
+            ul,
+            ol {
+                font-size: 1em; /* Equivalent to 17.6px if base is 16px */
+                font-weight: 400;
+                margin-bottom: 1.2em;
+                line-height: 1.8;
+            }
+
+            p {
+                font-size: 1em;
+                line-height: 1.8; /* Equivalent to 17.6px if base is 16px */
+                font-weight: 400;
+                margin-top: 0.8em;
+                margin-bottom: 0.8em;
+            }
+
+            blockquote {
+                padding: 1em 1.2em;
+
+            p {
+                margin: 0;
+            }
+        }
+
+        figcaption {
+            margin-top: 0.5em;
+            font-size: 0.8em; /* Equivalent to 17.6px if base is 16px */
+            font-weight: 400;
+            text-align: center;
+            font-style: normal;
+            color: #7F8896;
+        }
+
+        img {
+            display: block;
+            overflow: hidden;
+            max-width: 100%;
+            max-height: 335px;
+            margin: 1em auto;
+            border-radius: 8px;
+        }
+        }</style>
+</head>
+<body>
+<div class="container">
+<h1>大语言模型在芯片研发领域的应用：现状、挑战与未来展望</h1>
+<div class="toc">
+<h3>目录</h3>
+<ul>
+<li><a href="#introduction">引言：芯片研发的革新之路</a></li>
+<li><a href="#reasons-for-llms">LLMs大模型用于芯片研发的原因</a>
+<ul>
+<li><a href="#traditional-challenges">传统芯片研发的挑战</a></li>
+<li><a href="#llm-capabilities">LLMs的核心能力与潜在价值</a></li>
+</ul>
+</li>
+<li><a href="#history-of-llms-in-chip-rd">从敏捷芯片研发到LLMs加速芯片研发的历史</a>
+<ul>
+<li><a href="#traditional-design-methods">传统芯片设计方法</a></li>
+<li><a href="#agile-chip-development">敏捷芯片研发的兴起</a></li>
+<li><a href="#early-ai-ml">早期AI/ML在芯片设计中的应用（LLMs出现前）</a></li>
+<li><a href="#llm-emergence">LLMs的出现与融合</a></li>
+</ul>
+</li>
+<li><a href="#current-research-status">当前LLMs大模型用于芯片研发的科研现状</a>
+<ul>
+<li><a href="#llms-in-frontend">LLMs在芯片前端设计（逻辑设计与验证）的应用</a></li>
+<li><a href="#llms-in-backend">LLMs在芯片后端设计（物理设计）的应用</a></li>
+<li><a href="#llms-in-ppa">LLMs在PPA预测与优化中的应用</a></li>
+<li><a href="#domain-adaptation">领域自适应与模型优化技术</a></li>
+<li><a href="#challenges-research-directions">面临的挑战与研究方向</a></li>
+</ul>
+</li>
+<li><a href="#commercial-cases-startups">LLMs大模型用于芯片研发的商业案例和创业公司分析</a>
+<ul>
+<li><a href="#big-tech-eda-giants">大型科技公司与EDA巨头的布局</a></li>
+<li><a href="#emerging-startups">新兴创业公司及其解决方案</a></li>
+<li><a href="#commercial-applications-value">商业应用场景与价值</a></li>
+<li><a href="#market-adoption-challenges">市场采纳度与挑战</a></li>
+<li><a href="#vc-investment-trends">资本市场关注与投资趋势</a></li>
+</ul>
+</li>
+<li><a href="#conclusion-outlook">总结与展望</a></li>
+<li><a href="#references">参考文献</a></li>
+</ul>
+</div>
+<section id="introduction">
+<h2>引言：芯片研发的革新之路</h2>
+<p>芯片产业作为现代信息技术的基石，正面临着前所未有的挑战。一方面，随着人工智能、物联网、大数据等新兴应用的飞速发展，对芯片性能、功耗、面积（PPA）的要求日益严苛，设计复杂度呈指数级增长。另一方面，传统的芯片设计方法学在应对这种复杂性时显得力不从心，研发周期冗长、成本高昂、上市时间压力巨大。摩尔定律的放缓也使得单纯依靠工艺节点的进步来提升性能变得越来越困难 <a href="https://www.synopsys.com/blogs/chip-design/ai-chip-design-dac-2024.html" target="_blank">(Synopsys Blog, 2024)</a>。这些因素共同推动着芯片设计领域寻求革命性的技术突破。</p>
+<p>在这样的背景下，以大语言模型（LLMs）为代表的人工智能技术异军突起，它们在自然语言处理、代码生成、知识推理等领域展现出的颠覆性潜力，为芯片研发带来了新的曙光。LLMs能够理解和生成类似人类的文本，甚至代码，这为自动化和智能化芯片设计流程提供了全新的可能性。正如ChipGPT研究所指出的，LLMs展现了“前所未有的机器智能”，有望“通过自然语言交互协助硬件工程师实现更高效的逻辑设计” <a href="https://arxiv.org/abs/2305.17240" target="_blank">(ChipGPT: How far are we from natural language hardware design, Abstract)</a>。<em data-skywork="text_badge" data-sk-source-text="在这样的背景下，以大语言模型（LLMs）为代表的人工智能技术异军突起，它们在自然语言处理、代码生成、知识推理等领域展现出的颠覆性潜力，为芯片研发带来了新的曙光。LLMs能够理解和生成类似人类的文本，甚至代码，这为自动化和智能化芯片设计流程提供了全新的可能性。正如ChipGPT研究所指出的，LLMs展现了“前所未有的机器智能”，有望“通过自然语言交互协助硬件工程师实现更高效的逻辑设计” (ChipGPT: How far are we from natural language hardware design, Abstract)。" id="skTag-ZLNLZG" class="sk-source-tag" data-sk-source-id="ZLNLZG" ></em></p>
+<p>本报告旨在深入探讨大语言模型在芯片研发领域的应用现状、驱动因素、发展历程、关键技术、商业化进展以及未来展望。我们将分析LLMs如何应对传统芯片设计的痛点，梳理其在芯片设计自动化（EDA）工具和流程中的演进，展示当前学术界和产业界的最新研究成果与商业案例，并讨论其面临的挑战与机遇，以期为相关领域的科研人员、工程师和决策者提供有价值的参考。</p>
+</section>
+<section id="reasons-for-llms">
+<h2>LLMs大模型用于芯片研发的原因</h2>
+<p>大语言模型（LLMs）之所以能够跨界进入并有望革新芯片研发领域，其根本原因在于它们独特的能力恰好能够应对传统芯片设计流程中的诸多痛点，并带来前所未有的机遇<em data-skywork="text_badge" data-sk-source-text="大语言模型（LLMs）之所以能够跨界进入并有望革新芯片研发领域，其根本原因在于它们独特的能力恰好能够应对传统芯片设计流程中的诸多痛点，并带来前所未有的机遇。" id="skTag-SEADC0" class="sk-source-tag" data-sk-source-id="SEADC0" ></em>。这可以从传统芯片研发的挑战和LLMs的核心能力两个维度进行分析。</p>
+<h3 id="traditional-challenges">传统芯片研发的挑战</h3>
+<ul>
+<li><strong>设计复杂度与规模激增：</strong> 随着技术发展，芯片集成的晶体管数量已达数百亿甚至数万亿级别，系统功能日益复杂。传统设计方法难以高效处理如此庞大的设计空间和错综复杂的功能需求 <a href="https://www.synopsys.com/blogs/chip-design/ai-chip-design-dac-2024.html" target="_blank">(Synopsys Blog, 2024)</a>；<a href="https://arxiv.org/abs/2401.12224" target="_blank">(LLM4EDA: Emerging Progress in Large Language Models for Electronic Design Automation, Abstract)</a>。<em data-skywork="text_badge" data-sk-source-text="设计复杂度与规模激增： 随着技术发展，芯片集成的晶体管数量已达数百亿甚至数万亿级别，系统功能日益复杂。传统设计方法难以高效处理如此庞大的设计空间和错综复杂的功能需求 (Synopsys Blog, 2024)；(LLM4EDA: Emerging Progress in Large Language Models for Electronic Design Automation, Abstract)。" id="skTag-IKRL6O" class="sk-source-tag" data-sk-source-id="IKRL6O" ></em></li>
+<li><strong>研发周期长、成本高昂：</strong> 从芯片规格定义、架构设计、逻辑实现、物理设计到最终的流片验证，整个流程环节众多，耗时数月甚至数年。每一个环节的反复迭代和验证都意味着高昂的人力、工具和时间成本 <a href="https://www.synopsys.com/blogs/chip-design/ai-chip-design-dac-2024.html" target="_blank">(Synopsys Blog, 2024)</a>；<a href="https://si-electronics.com/en/ai-and-automation-the-future-of-semiconductor-manufacturing-part-two/" target="_blank">(SI Electronics, 2021)</a>。</li>
+<li><strong>摩尔定律趋缓的压力：</strong> 传统依赖工艺微缩带来的性能提升和成本下降的边际效应正在递减。业界亟需从设计方法学和架构创新上寻求新的突破点，以维持技术进步的步伐 <a href="https://www.synopsys.com/blogs/chip-design/ai-chip-design-dac-2024.html" target="_blank">(Synopsys Blog, 2024)</a>。</li>
+<li><strong>专业人才短缺与知识传承：</strong> 芯片设计高度依赖资深工程师的专业知识和实践经验。然而，顶尖人才培养周期长，且面临人才流失和知识断层的风险 <a href="https://www.synopsys.com/blogs/chip-design/ai-chip-design-dac-2024.html" target="_blank">(Synopsys Blog, 2024)</a>。Aitomatic也指出，资深专家的经验难以规模化复制 <a href="https://ai.meta.com/blog/aitomatic-built-with-llama/" target="_blank">(Meta AI Blog on Aitomatic, 2024)</a>。</li>
+<li><strong>设计和验证效率瓶颈：</strong> 芯片设计过程中涉及大量的硬件描述语言（HDL）编码、脚本编写、仿真调试和形式验证工作。这些任务往往重复性高、细节繁琐，容易出错，成为制约整体效率的关键瓶颈 <a href="https://arxiv.org/abs/2305.17240" target="_blank">(ChipGPT: How far are we from natural language hardware design, Introduction)</a>。<em data-skywork="text_badge" data-sk-source-text="设计和验证效率瓶颈： 芯片设计过程中涉及大量的硬件描述语言（HDL）编码、脚本编写、仿真调试和形式验证工作。这些任务往往重复性高、细节繁琐，容易出错，成为制约整体效率的关键瓶颈 (ChipGPT: How far are we from natural language hardware design, Introduction)。" id="skTag-SJL1XD" class="sk-source-tag" data-sk-source-id="SJL1XD" ></em></li>
+</ul>
+<h3 id="llm-capabilities">LLMs的核心能力与潜在价值</h3>
+<ul>
+<li><strong>自然语言交互与理解：</strong> LLMs能够理解人类的自然语言指令，这意味着工程师可以用更直观、更接近自然思维的方式描述硬件需求，从而生成初步的设计代码或规格文档。这极大地降低了芯片设计的门槛，使得非专业背景的人员也能参与到某些设计环节中 <a href="https://arxiv.org/abs/2305.17240" target="_blank">(ChipGPT: How far are we from natural language hardware design, Abstract &amp; Introduction)</a>；<a href="https://www.rioslab.org/2024/03/01/generative-ai-for-chip-design/" target="_blank">(RIOS Lab, 2024)</a>。<em data-skywork="text_badge" data-sk-source-text="自然语言交互与理解： LLMs能够理解人类的自然语言指令，这意味着工程师可以用更直观、更接近自然思维的方式描述硬件需求，从而生成初步的设计代码或规格文档。这极大地降低了芯片设计的门槛，使得非专业背景的人员也能参与到某些设计环节中 (ChipGPT: How far are we from natural language hardware design, Abstract &amp; Introduction)；(RIOS Lab, 2024)。" id="skTag-SJL1XF" class="sk-source-tag" data-sk-source-id="SJL1XF" ></em></li>
+<li><strong>代码生成与自动化：</strong> LLMs在代码生成方面表现出强大能力，能够自动生成HDL代码（如Verilog, SystemVerilog）、EDA工具脚本（如TCL, Python）、测试平台代码等。这可以显著减少工程师手动编码的工作量，提高设计效率，并减少人为错误 <a href="https://arxiv.org/abs/2305.17240" target="_blank">(ChipGPT Paper)</a>；<a href="https://arxiv.org/abs/2311.00176" target="_blank">(ChipNeMo Paper)</a>；<a href="https://ieeexplore.ieee.org/document/10538589" target="_blank">(IICPilot Paper, File title: IICPilot: An Intelligent Integrated Circuit Backend Design Framework Using Open EDA)</a>。<em data-skywork="text_badge" data-sk-source-text="代码生成与自动化： LLMs在代码生成方面表现出强大能力，能够自动生成HDL代码（如Verilog, SystemVerilog）、EDA工具脚本（如TCL, Python）、测试平台代码等。这可以显著减少工程师手动编码的工作量，提高设计效率，并减少人为错误 (ChipGPT Paper)；(ChipNeMo Paper)；(IICPilot Paper, File title: IICPilot: An Intelligent Integrated Circuit Backend Design Framework Using Open EDA)。" id="skTag-SGS9ON" class="sk-source-tag" data-sk-source-id="SGS9ON" ></em></li>
+<li><strong>知识整合与推理：</strong> LLMs可以通过学习海量的设计文档、技术手册、开源代码库和学术论文，构建庞大的专业知识体系。它们能够基于这些知识进行一定程度的逻辑推理，为工程师提供设计建议、错误分析、文献检索等辅助决策支持 <a href="https://www.palantir.com/assets/xrfr7uokpv1b/2T3BgBpe3drnqBaSTCXl6O/bdc9445d10053eb84b3f9487e63fc2d7/Whitepaper_-_Accelerating_Research_and_Development_in_the_Semiconductor_Industry.pdf" target="_blank">(Palantir Whitepaper)</a>；<a href="https://www.sciencedirect.com/science/article/pii/S2949747724000344" target="_blank">(ScienceDirect on LLMs for materials science, 2024)</a>。<em data-skywork="text_badge" data-sk-source-text="知识整合与推理： LLMs可以通过学习海量的设计文档、技术手册、开源代码库和学术论文，构建庞大的专业知识体系。它们能够基于这些知识进行一定程度的逻辑推理，为工程师提供设计建议、错误分析、文献检索等辅助决策支持 (Palantir Whitepaper)；(ScienceDirect on LLMs for materials science, 2024)。" id="skTag-SFL91E" class="sk-source-tag" data-sk-source-id="SFL91E" ></em></li>
+<li><strong>设计空间探索与优化：</strong> LLMs可以辅助进行设计空间探索（DSE），通过生成不同的设计变体或调整设计参数，并结合PPA（功耗、性能、面积）评估工具，帮助工程师更快地找到满足约束条件的最优或次优设计方案 <a href="https://arxiv.org/abs/2305.17240" target="_blank">(ChipGPT Paper)</a>；<a href="https://ieeexplore.ieee.org/document/10538589" target="_blank">(IICPilot Paper)</a>；<a href="https://arxiv.org/html/2503.21971v2" target="_blank">(RocketPPA Paper)</a>。<em data-skywork="text_badge" data-sk-source-text="设计空间探索与优化： LLMs可以辅助进行设计空间探索（DSE），通过生成不同的设计变体或调整设计参数，并结合PPA（功耗、性能、面积）评估工具，帮助工程师更快地找到满足约束条件的最优或次优设计方案 (ChipGPT Paper)；(IICPilot Paper)；(RocketPPA Paper)。" id="skTag-SR2QYT" class="sk-source-tag" data-sk-source-id="SR2QYT" ></em></li>
+<li><strong>加速创新与提升创造力：</strong> 通过将工程师从大量重复性、低层次的劳动中解放出来，LLMs使他们能够更专注于架构设计、算法创新等更具创造性的高层次工作，从而加速整个行业的创新步伐 <a href="https://arxiv.org/abs/2305.17240" target="_blank">(ChipGPT: How far are we from natural language hardware design, Introduction)</a>。ChipGPT研究明确指出，自然语言逻辑设计可能“通过最大限度地发挥创造力和规模化复杂性来彻底改变芯片设计”。</li>
+<li><strong>降低入门门槛与普及化：</strong> LLMs有望通过简化设计流程和提供智能辅助，降低芯片设计的学习曲线和技术门槛，吸引更多跨学科人才进入该领域，推动设计的普及化 <a href="https://www.rioslab.org/2024/03/01/generative-ai-for-chip-design/" target="_blank">(RIOS Lab, 2024)</a>。<em data-skywork="text_badge" data-sk-source-text="降低入门门槛与普及化： LLMs有望通过简化设计流程和提供智能辅助，降低芯片设计的学习曲线和技术门槛，吸引更多跨学科人才进入该领域，推动设计的普及化 (RIOS Lab, 2024)。" id="skTag-SFL91E" class="sk-source-tag" data-sk-source-id="SFL91E" ></em></li>
+</ul>
+<div class="key-points">
+<h4>关键要点</h4>
+<ul>
+<li>LLMs凭借其在处理复杂信息、自动化任务和自然语言理解方面的独特优势，为解决传统芯片设计的痛点提供了新的途径。<em data-skywork="text_badge" data-sk-source-text="LLMs凭借其在处理复杂信息、自动化任务和自然语言理解方面的独特优势，为解决传统芯片设计的痛点提供了新的途径。" id="skTag-SFL91E" class="sk-source-tag" data-sk-source-id="SFL91E" ></em></li>
+<li>LLMs的应用不仅是技术上的革新，更是对芯片设计方法学、人才培养和产业生态的深远影响，其核心价值在于提升效率、降低成本、加速创新。</li>
+<li>ChipGPT研究强调LLMs带来的“前所未有的机器智能”和“彻底改变芯片设计”的潜力，而ChipNeMo则证明了“领域自适应预训练能够带来卓越的下游任务性能” <a href="https://arxiv.org/abs/2311.00176" target="_blank">(ChipNeMo Paper, Abstract)</a>。<em data-skywork="text_badge" data-sk-source-text="ChipGPT研究强调LLMs带来的“前所未有的机器智能”和“彻底改变芯片设计”的潜力，而ChipNeMo则证明了“领域自适应预训练能够带来卓越的下游任务性能” (ChipNeMo Paper, Abstract)。" id="skTag-SYKG0A" class="sk-source-tag" data-sk-source-id="SYKG0A" ></em></li>
+</ul>
+</div>
+</section>
+<section id="history-of-llms-in-chip-rd">
+<h2>从敏捷芯片研发到LLMs加速芯片研发的历史</h2>
+<p>芯片设计方法学的演进是一个不断追求更高抽象层次、更强自动化能力和更快迭代速度的过程。大语言模型（LLMs）的介入并非一蹴而就，而是建立在先前设计理念和技术积累的基础之上，特别是敏捷思想和早期人工智能应用的铺垫。<em data-skywork="text_badge" data-sk-source-text="大语言模型（LLMs）的介入并非一蹴而就，而是建立在先前设计理念和技术积累的基础之上，特别是敏捷思想和早期人工智能应用的铺垫。" id="skTag-SEADC0" class="sk-source-tag" data-sk-source-id="SEADC0" ></em></p>
+<h3 id="traditional-design-methods">传统芯片设计方法</h3>
+<p>早期的芯片设计严重依赖手动操作，遵循类似瀑布模型的开发流程，即设计、实现、验证等阶段严格串行。这种方法周期长、容错率低，难以适应快速变化的市场需求。随着芯片规模的增大，电子设计自动化（EDA）工具应运而生并逐步发展。EDA工具将设计流程中的特定环节（如逻辑综合、布局布线、时序分析等）自动化，极大地提高了设计效率和可靠性 <a href="https://arxiv.org/abs/2401.12224" target="_blank">(LLM4EDA: Emerging Progress in Large Language Models for Electronic Design Automation, Abstract)</a>。然而，EDA工具本身的操作和脚本编写仍需大量专业知识。<em data-skywork="text_badge" data-sk-source-text="早期的芯片设计严重依赖手动操作，遵循类似瀑布模型的开发流程，即设计、实现、验证等阶段严格串行。这种方法周期长、容错率低，难以适应快速变化的市场需求。随着芯片规模的增大，电子设计自动化（EDA）工具应运而生并逐步发展。EDA工具将设计流程中的特定环节（如逻辑综合、布局布线、时序分析等）自动化，极大地提高了设计效率和可靠性 (LLM4EDA: Emerging Progress in Large Language Models for Electronic Design Automation, Abstract)。然而，EDA工具本身的操作和脚本编写仍需大量专业知识。" id="skTag-PW1156" class="sk-source-tag" data-sk-source-id="PW1156" ></em></p>
+<h3 id="agile-chip-development">敏捷芯片研发的兴起</h3>
+<p>为了应对日益增长的复杂性和市场压力，芯片设计领域开始借鉴软件工程中的敏捷开发思想。敏捷芯片研发强调快速迭代、模块化设计、早期验证和设计复用 <a href="https://sld.cs.columbia.edu/pubs/dossantos_iccad22.pdf" target="_blank">(A Scalable Methodology for Agile Chip Development with Open-Source...)</a>。这一阶段出现了几种关键技术：</p>
+<ul>
+<li><strong>高级语言综合（High-Level Synthesis, HLS）：</strong> 允许工程师使用C/C++、SystemC或Scala（如Chisel框架）等更高级别的编程语言进行硬件设计，然后通过HLS工具将其转换为底层的HDL代码。这提升了设计的抽象层次，缩短了开发时间，并使得软件工程师更容易参与硬件设计 <a href="https://arxiv.org/abs/2305.17240" target="_blank">(ChipGPT: How far are we from natural language hardware design, Background and Motivation)</a>。<em data-skywork="text_badge" data-sk-source-text="高级语言综合（High-Level Synthesis, HLS）： 允许工程师使用C/C++、SystemC或Scala（如Chisel框架）等更高级别的编程语言进行硬件设计，然后通过HLS工具将其转换为底层的HDL代码。这提升了设计的抽象层次，缩短了开发时间，并使得软件工程师更容易参与硬件设计 (ChipGPT: How far are we from natural language hardware design, Background and Motivation)。" id="skTag-IKRL6O" class="sk-source-tag" data-sk-source-id="IKRL6O" ></em></li>
+<li><strong>程序综合（Program Synthesis）：</strong> 这类方法尝试从更高层次的规约（如形式化描述或输入输出样例）自动生成可执行的程序或硬件描述。例如，Bosy工具就是一种基于形式化方法的演绎综合技术，能够生成“正确即构造”的硬件设计，但其对输入规约的完备性和形式化程度要求较高，学习门槛也较高 <a href="https://arxiv.org/abs/2305.17240" target="_blank">(ChipGPT: How far are we from natural language hardware design, Background and Motivation)</a>。</li>
+</ul>
+<p>尽管敏捷方法和HLS等技术提高了效率，但它们通常仍依赖于形式化的规约或高级编程技能，尚未实现通过自然语言进行直观交互的理想状态。</p>
+<h3 id="early-ai-ml">早期AI/ML在芯片设计中的应用（LLMs出现前）</h3>
+<p>在LLMs大规模兴起之前，传统的机器学习（ML）技术，如卷积神经网络（CNNs）、图神经网络（GNNs）和强化学习（RL），已经在芯片设计的特定环节得到应用。这些应用主要集中在：</p>
+<ul>
+<li><strong>物理设计优化：</strong> 例如，利用ML模型进行单元布局预测、布线拥塞分析和时钟树综合优化 <a href="https://ieeexplore.ieee.org/document/9205654" target="_blank">(Accelerating Chip Design With Machine Learning - IEEE Xplore, Abstract)</a>。Google的AlphaChip（早期版本可能不完全依赖LLM，更多是RL）在芯片布局（floorplanning）方面取得了显著成果 <a href="https://deepmind.google/discover/blog/how-alphachip-transformed-computer-chip-design/" target="_blank">(How AlphaChip transformed computer chip design, 2020 preprint)</a>。</li>
+<li><strong>功耗和性能分析：</strong> 使用ML模型根据设计特征快速预估芯片的功耗和性能指标。</li>
+<li><strong>测试与验证：</strong> 例如，通过ML优化测试向量生成，或辅助进行缺陷定位。</li>
+<li><strong>设计空间探索：</strong> AI算法被用于更智能地探索广阔的设计参数空间，以寻找PPA更优的解决方案。</li>
+</ul>
+<p>这些早期的AI/ML应用主要针对特定子问题，依赖结构化数据和特征工程，尚未形成统一的、基于自然语言的交互范式。</p>
+<h3 id="llm-emergence">LLMs的出现与融合</h3>
+<p>大语言模型的出现为芯片设计带来了新的变革契机。LLMs强大的自然语言理解和生成能力，使其有望成为连接人类设计师意图与复杂EDA工具之间的新桥梁。ChipGPT研究将“自然语言逻辑设计”视为敏捷芯片设计的“终极目标” <a href="https://arxiv.org/abs/2305.17240" target="_blank">(ChipGPT: How far are we from natural language hardware design, Introduction)</a>。LLMs开始被探索用于直接从自然语言描述生成HDL代码、自动化EDA脚本编写、辅助理解设计文档、进行Bug分析和总结等任务。例如，NVIDIA的ChipNeMo项目致力于构建领域自适应的LLM，用于工程助手、EDA脚本生成等 <a href="https://arxiv.org/abs/2311.00176" target="_blank">(ChipNeMo Paper, Abstract)</a>。Capgemini的报告也指出，生成式AI（GenAI）正被用于缩短设计周期和优化制造过程 <a href="https://www.capgemini.com/wp-content/uploads/2025/01/Semiconductors-report.pdf" target="_blank">(The semiconductor industry in the AI era, 2025)</a>。LLMs的融入，正推动芯片设计向着更高级别的自动化和智能化加速发展。</p>
+<div class="key-points">
+<h4>关键要点</h4>
+<ul>
+<li>芯片设计方法学经历了从手动设计到EDA辅助，再到敏捷思想引入（如HLS、程序综合）的演进，不断提升抽象层次和自动化程度。</li>
+<li>早期AI/ML技术已在物理设计、PPA预测等特定环节展现价值，但多为点状应用。</li>
+<li>LLMs的出现，特别是其自然语言处理能力，为实现更直观、更智能的芯片设计交互和自动化流程开辟了新道路，被视为敏捷设计理念的进一步延伸和“终极目标”。</li>
+<li>ChipGPT的演进描述清晰地展示了从HLS/Chisel到程序综合，最终迈向自然语言逻辑设计的历史轨迹。<em data-skywork="text_badge" data-sk-source-text="ChipGPT的演进描述清晰地展示了从HLS/Chisel到程序综合，最终迈向自然语言逻辑设计的历史轨迹。" id="skTag-SR2QYQ" class="sk-source-tag" data-sk-source-id="SR2QYQ" ></em></li>
+</ul>
+</div>
+</section>
+
+<section id="current-research-status">
+<h2>当前LLMs大模型用于芯片研发的科研现状</h2>
+<p>大语言模型（LLMs）在芯片研发领域的应用正成为学术界和产业界关注的焦点<em data-skywork="text_badge" data-sk-source-text="大语言模型（LLMs）在芯片研发领域的应用正成为学术界和产业界关注的焦点。" id="skTag-SEADC0" class="sk-source-tag" data-sk-source-id="SEADC0" ></em>。随着《A Survey of Circuit Foundation Model Foundation AI Models for VLSI Circuit Design and EDA》等综述文献的出现，我们可以全面把握LLMs在电子设计自动化（EDA）领域的研究进展。当前研究主要集中在芯片前端设计、后端设计、设计空间探索与优化等方面，以及解决领域自适应等关键挑战。</p>
+
+<h3 id="llms-in-chip-development-history">LLMs大模型用于芯片研发的历史</h3>
+<p>LLMs在芯片研发领域的应用虽然近年才受到广泛关注，但其发展可追溯到更早的探索阶段。从历史角度来看，LLMs与芯片研发的融合经历了几个关键阶段：</p>
+
+<ul>
+<li><strong>早期探索阶段 (2020-2021)：</strong> 这一时期，研究者开始探索将自然语言处理技术应用于芯片设计任务的可能性。基于BERT、GPT等早期模型的实验性研究开始出现，但主要局限于简单的代码生成和文档理解任务 <a href="https://arxiv.org/abs/2401.12224" target="_blank">(LLM4EDA: Emerging Progress in Large Language Models for Electronic Design Automation, History)</a>。<em data-skywork="text_badge" data-sk-source-text="早期探索阶段 (2020-2021)： 这一时期，研究者开始探索将自然语言处理技术应用于芯片设计任务的可能性。基于BERT、GPT等早期模型的实验性研究开始出现，但主要局限于简单的代码生成和文档理解任务 (LLM4EDA: Emerging Progress in Large Language Models for Electronic Design Automation, History)。" id="skTag-LSXSSI" class="sk-source-tag" data-sk-source-id="LSXSSI" ></em></li>
+
+<li><strong>概念验证阶段 (2022)：</strong> 随着更大规模LLMs的出现，研究者开始尝试将模型应用于更复杂的芯片设计任务。这一阶段的研究主要集中在探索LLMs在硬件描述语言(HDL)代码生成、设计理解和简单验证任务上的能力 <a href="https://arxiv.org/abs/2401.12224" target="_blank">(LLM4EDA: Emerging Progress in Large Language Models for Electronic Design Automation, History)</a>。<em data-skywork="text_badge" data-sk-source-text="概念验证阶段 (2022)： 随着更大规模LLMs的出现，研究者开始尝试将模型应用于更复杂的芯片设计任务。这一阶段的研究主要集中在探索LLMs在硬件描述语言(HDL)代码生成、设计理解和简单验证任务上的能力 (LLM4EDA: Emerging Progress in Large Language Models for Electronic Design Automation, History)。" id="skTag-LSXSSG" class="sk-source-tag" data-sk-source-id="LSXSSG" ></em></li>
+
+<li><strong>快速发展阶段 (2023-至今)：</strong> 伴随着ChatGPT、GPT-4等大型模型的发布，LLMs在芯片研发领域的应用迎来了爆发式增长。这一时期出现了多个重要的研究成果和项目，如ChipGPT、ChipNeMo、VerilogEval等。研究重点也从简单的代码生成扩展到了设计优化、验证、后端物理设计辅助等多个方面 <a href="https://arxiv.org/abs/2305.17240" target="_blank">(ChipGPT Paper)</a>；<a href="https://arxiv.org/abs/2311.00176" target="_blank">(ChipNeMo Paper)</a>。<em data-skywork="text_badge" data-sk-source-text="快速发展阶段 (2023-至今)： 伴随着ChatGPT、GPT-4等大型模型的发布，LLMs在芯片研发领域的应用迎来了爆发式增长。这一时期出现了多个重要的研究成果和项目，如ChipGPT、ChipNeMo、VerilogEval等。研究重点也从简单的代码生成扩展到了设计优化、验证、后端物理设计辅助等多个方面 (ChipGPT Paper)；(ChipNeMo Paper)。" id="skTag-SJL1XI" class="sk-source-tag" data-sk-source-id="SJL1XI" ></em></li>
+
+<li><strong>领域自适应与基础模型阶段 (2023末-至今)：</strong> 最新的研究趋势是发展专门针对芯片设计领域的基础模型，如CircuitLM、SemiKong等。这些模型通过领域特定数据的预训练和微调，大大提升了在芯片设计相关任务上的表现。同时，多模态模型的研究也开始起步，尝试结合文本、图像和电路图等多种信息 <a href="https://arxiv.org/abs/2402.05112" target="_blank">(CircuitLM: An Open-Source Toolkit of Foundation Models for Chip Design, Abstract)</a>；<a href="https://arxiv.org/abs/2403.06932" target="_blank">(CircuitBench: A Comprehensive Benchmark for Multimodal Circuit Foundation Models, Abstract)</a>。</li>
+</ul>
+
+<p>值得注意的是，LLMs在芯片研发中的应用发展迅速但仍处于早期阶段。从研究角度看，芯片设计的复杂性和专业性对LLMs提出了独特挑战，推动了多种特定于领域的技术创新，如领域自适应、多智能体协作和多模态融合等方向。从产业角度看，LLMs正从实验性应用逐步走向实际生产环境，特别是在设计辅助、文档生成和验证场景方面 <a href="https://arxiv.org/abs/2401.12224" target="_blank">(LLM4EDA: Emerging Progress in Large Language Models for Electronic Design Automation, Evolution)</a>。<em data-skywork="text_badge" data-sk-source-text="值得注意的是，LLMs在芯片研发中的应用发展迅速但仍处于早期阶段。从研究角度看，芯片设计的复杂性和专业性对LLMs提出了独特挑战，推动了多种特定于领域的技术创新，如领域自适应、多智能体协作和多模态融合等方向。从产业角度看，LLMs正从实验性应用逐步走向实际生产环境，特别是在设计辅助、文档生成和验证场景方面 (LLM4EDA: Emerging Progress in Large Language Models for Electronic Design Automation, Evolution)。" id="skTag-SEADC0" class="sk-source-tag" data-sk-source-id="SEADC0" ></em></p>
+
+<h3 id="llms-in-frontend">LLMs在芯片前端设计的应用</h3>
+
+<h4>自然语言到HDL代码生成</h4>
+<p>将设计意图从自然语言直接转化为硬件描述语言（HDL）是LLMs在芯片前端应用的核心方向。<em data-skywork="text_badge" data-sk-source-text="将设计意图从自然语言直接转化为硬件描述语言（HDL）是LLMs在芯片前端应用的核心方向。" id="skTag-QNHWXS" class="sk-source-tag" data-sk-source-id="QNHWXS" ></em></p>
+<ul>
+<li><strong>ChipGPT框架：</strong> 该研究提出基于GPT-3.5的四阶段逻辑设计框架，包括提示管理器、输出管理器和枚举搜索，无需对LLM进行重训练或微调。评估结果显示，与传统方法相比，代码量显著减少（相比HLS减少9.25倍，相比Chisel减少5.32倍）；在PPA优化方面，针对复杂工作负载，平均面积减少了47%；代码质量提升了2.01倍 <a href="https://arxiv.org/abs/2305.17240" target="_blank">(ChipGPT: How far are we from natural language hardware design, Abstract, Evaluation)</a>。<em data-skywork="text_badge" data-sk-source-text="ChipGPT框架： 该研究提出基于GPT-3.5的四阶段逻辑设计框架，包括提示管理器、输出管理器和枚举搜索，无需对LLM进行重训练或微调。评估结果显示，与传统方法相比，代码量显著减少（相比HLS减少9.25倍，相比Chisel减少5.32倍）；在PPA优化方面，针对复杂工作负载，平均面积减少了47%；代码质量提升了2.01倍 (ChipGPT: How far are we from natural language hardware design, Abstract, Evaluation)。" id="skTag-SR2QYQ" class="sk-source-tag" data-sk-source-id="SR2QYQ" ></em></li>
+<li><strong>VerilogEval：</strong> 该基准测试集被用于评估LLMs在生成Verilog代码方面的能力，包含174个高质量的Verilog代码生成任务，涵盖不同难度级别。研究表明，当前顶级LLMs在简单任务上表现良好，但在复杂和真实场景任务上能力有限 <a href="https://arxiv.org/abs/2309.07544" target="_blank">(VerilogEval: Evaluating Large Language Models for Verilog Code Generation, Abstract)</a>。<em data-skywork="text_badge" data-sk-source-text="VerilogEval： 该基准测试集被用于评估LLMs在生成Verilog代码方面的能力，包含174个高质量的Verilog代码生成任务，涵盖不同难度级别。研究表明，当前顶级LLMs在简单任务上表现良好，但在复杂和真实场景任务上能力有限 (VerilogEval: Evaluating Large Language Models for Verilog Code Generation, Abstract)。" id="skTag-SGS9ON" class="sk-source-tag" data-sk-source-id="SGS9ON" ></em></li>
+<li><strong>ChatCPU平台：</strong> 这是一个基于LLM的敏捷CPU设计与验证平台。研究表明，ChatCPU能够平均加速设计迭代过程3.81倍，在HDL实现和验证阶段，峰值加速分别达到了12倍和9.33倍 <a href="https://dl.acm.org/doi/10.1145/3649329.3658493" target="_blank">(ChatCPU: An Agile CPU Design and Verification Platform with LLM, Abstract)</a>。</li>
+</ul>
+
+<div class="chart-container" style="height: 450px;">
+<canvas id="chipGptCodeReductionChart"></canvas>
+</div>
+<figcaption>图1: ChipGPT 与传统敏捷方法代码量对比 (数据来源: ChipGPT Paper, Finding 1)</figcaption>
+
+<h4>HDL代码生成与优化</h4>
+<p>除了直接的自然语言转HDL之外，研究者还在HDL代码优化方向进行了大量探索：</p>
+<ul>
+<li><strong>ChipGPT-FT框架：</strong> 该研究改进了原始的ChipGPT方法，提出"数据即一切"（Data is All You Need）的理念，通过自动化的设计数据增强框架对LLMs进行微调。实验表明，这种方法可以解决通用LLMs在芯片设计领域的缺陷，如部件理解能力、合成友好性和面积最小化能力，显著提高了生成HDL代码的质量 <a href="https://github.com/aichipdesign/chipgptft" target="_blank">(ChipGPT-FT GitHub Repository)</a>。</li>
+<li><strong>LLM-VeriPPA：</strong> 该研究聚焦于功耗、性能和面积（PPA）感知的Verilog代码生成与优化。通过结合LLM的理解能力和专用的PPA评估工具，LLM-VeriPPA能够对生成的代码进行迭代优化，使其更符合PPA约束要求 <a href="https://llm-gnn.org/slides/LLM-VeriPPA-Ding.pdf" target="_blank">(LLM-VeriPPA Slides)</a>。</li>
+</ul>
+
+<h4>设计规格生成与理解</h4>
+<p>LLMs在芯片设计规格的生成和理解方面也展现出潜力：</p>
+<ul>
+<li><strong>SpecLLM：</strong> 该研究探索了LLMs在VLSI设计规格生成和审查方面的能力。研究表明，适当调整过的LLMs不仅能够根据设计需求生成结构化的规格文档，还能协助工程师检查规格中的错误和不一致，提高设计规格的质量 <a href="https://github.com/hkust-zhiyao/SpecLLM" target="_blank">(SpecLLM GitHub)</a>。<em data-skywork="text_badge" data-sk-source-text="SpecLLM： 该研究探索了LLMs在VLSI设计规格生成和审查方面的能力。研究表明，适当调整过的LLMs不仅能够根据设计需求生成结构化的规格文档，还能协助工程师检查规格中的错误和不一致，提高设计规格的质量 (SpecLLM GitHub)。" id="skTag-SGS9ON" class="sk-source-tag" data-sk-source-id="SGS9ON" ></em></li>
+</ul>
+
+<h4>硬件验证与断言生成</h4>
+<p>验证是芯片设计中最耗时的环节之一，LLMs在此方面的应用也取得了进展：</p>
+<ul>
+<li><strong>AssertLLM：</strong> 该研究聚焦于使用LLMs生成硬件验证断言（assertions）。通过对输入设计代码的理解，AssertLLM能够自动生成潜在的断言检查，帮助设计师发现设计中的潜在缺陷。实验表明，这种方法不仅能提高覆盖率，还能减少设计师在验证方面的工作量 <a href="https://arxiv.org/pdf/2402.00386" target="_blank">(AssertLLM Paper)</a>。<em data-skywork="text_badge" data-sk-source-text="AssertLLM： 该研究聚焦于使用LLMs生成硬件验证断言（assertions）。通过对输入设计代码的理解，AssertLLM能够自动生成潜在的断言检查，帮助设计师发现设计中的潜在缺陷。实验表明，这种方法不仅能提高覆盖率，还能减少设计师在验证方面的工作量 (AssertLLM Paper)。" id="skTag-UTOTFT" class="sk-source-tag" data-sk-source-id="UTOTFT" ></em></li>
+<li><strong>RAG增强的断言生成：</strong> 有研究采用检索增强生成（RAG）技术来提高LLMs生成的VLSI断言质量。通过将高级规格文档作为检索知识库，该方法可以显著降低LLM生成断言中的幻觉，并确保生成的断言与设计规格一致 <a href="https://dvcon-proceedings.org/wp-content/uploads/195-Enhanced-VLSI-Assertion-Generation-Conforming-to-High-Level-Specifications-and-Reducing-LLM-Hallucinations-with-RAG.pdf" target="_blank">(Enhanced VLSI Assertion Generation with RAG)</a>。<em data-skywork="text_badge" data-sk-source-text="RAG增强的断言生成： 有研究采用检索增强生成（RAG）技术来提高LLMs生成的VLSI断言质量。通过将高级规格文档作为检索知识库，该方法可以显著降低LLM生成断言中的幻觉，并确保生成的断言与设计规格一致 (Enhanced VLSI Assertion Generation with RAG)。" id="skTag-ZLNLZB" class="sk-source-tag" data-sk-source-id="ZLNLZB" ></em></li>
+</ul>
+
+<h3 id="llms-in-backend">LLMs在芯片后端设计（物理设计）的应用</h3>
+<p>在后端物理设计领域，LLMs与其他AI技术的结合也开始显现价值。</p>
+<ul>
+<li><strong>IICPilot框架：</strong> 这是一个智能集成电路后端设计框架，融合LLM和多智能体技术，利用开源EDA工具实现布局布线流程自动化。实验表明，该框架能通过智能的阈值设置和参数调整实现高效的后端设计，对多种基准电路（包括aes、picorv32、ibex和gcd）的PPA优化率分别达到了7.76%、32.75%、16.89%和9.12% <a href="https://ieeexplore.ieee.org/document/10538589" target="_blank">(IICPilot Paper)</a>。</li>
+<li><strong>DeepTH：</strong> 这是一个基于深度强化学习的三阶段混合芯片布局方法。虽然DeepTH本身不直接使用LLMs，但它代表了AI在芯片物理设计中的先进应用，为未来LLMs与深度强化学习结合的研究提供了基础 <a href="https://ieeexplore.ieee.org/document/10137100" target="_blank">(DeepTH Paper)</a>。</li>
+</ul>
+
+<h3 id="llms-in-ppa">LLMs在PPA预测与优化中的应用</h3>
+<p>功耗（Power）、性能（Performance）和面积（Area）是芯片设计中的核心指标，LLMs也开始应用于PPA的预测与优化。<em data-skywork="text_badge" data-sk-source-text="功耗（Power）、性能（Performance）和面积（Area）是芯片设计中的核心指标，LLMs也开始应用于PPA的预测与优化。" id="skTag-SR2QYT" class="sk-source-tag" data-sk-source-id="SR2QYT" ></em></p>
+<ul>
+<li><strong>RocketPPA：</strong> 该研究提出了一种代码级的PPA预测方法，结合LLMs和专家混合（MoE）多层感知器。RocketPPA能够直接从RTL代码预测芯片的功耗、性能和面积指标，比传统方法更快、更准确。在10%相对误差阈值下，RocketPPA在面积、延迟和功耗预测的通过率分别提升了13.6%、9.4%和14.7% <a href="https://arxiv.org/html/2503.21971v2" target="_blank">(RocketPPA Paper)</a>。</li>
+</ul>
+
+<h3 id="llms-as-circuit-decoders">LLMs作为电路解码器</h3>
+<p>将LLMs作为电路解码器的研究代表了一种前沿探索，这种角色下LLMs需要理解电路的结构与功能，并将其翻译为更高抽象层次的理解。</p>
+
+<h4>电路结构理解与分析</h4>
+<ul>
+<li><strong>CircuitBERT：</strong> 这是芯片设计领域首个预训练语言模型，基于BERT架构进行改造，专门用于RTL代码理解。CircuitBERT被预训练用于掩码语言建模和RTL结构预测任务，在多个下游任务（包括RTL分类、RTL克隆检测和RTL标注）中表现出色，超越了传统的非预训练方法 <a href="https://dl.acm.org/doi/10.1145/3489517.3530601" target="_blank">(CircuitBERT: A Pre-trained Language Model for Register-Transfer Level)</a>。</li>
+
+<li><strong>RTLCoder：</strong> 该研究扩展了CircuitBERT的工作，提出了一个更全面的"理解-生成"框架，专门用于RTL代码的自动生成、转换和修复。RTLCoder通过在大量RTL代码上预训练，不仅能理解RTL代码结构，还能生成新的RTL代码或修复现有代码中的错误 <a href="https://dl.acm.org/doi/10.1145/3569052.3578922" target="_blank">(RTLCoder: RTL Code Generation, Translation, and Debugging via Pre-trained Language Model)</a>。</li>
+</ul>
+
+<h4>多模态电路理解</h4>
+<p>电路设计不仅涉及文本代码，还包括图形、波形等多种信息形式，多模态LLMs的研究正在推动这一方向的发展：</p>
+
+<ul>
+<li><strong>CircuitLM：</strong> 这是一个开源的芯片设计基础模型工具包，包含了多个模型系列，覆盖从HDL代码理解到多模态电路理解的各个方面。CircuitLM特别强调了多模态理解的重要性，能够处理文本代码与电路示意图的结合分析，为更全面的电路理解提供了可能 <a href="https://arxiv.org/abs/2402.05112" target="_blank">(CircuitLM: An Open-Source Toolkit of Foundation Models for Chip Design)</a>。<em data-skywork="text_badge" data-sk-source-text="CircuitLM： 这是一个开源的芯片设计基础模型工具包，包含了多个模型系列，覆盖从HDL代码理解到多模态电路理解的各个方面。CircuitLM特别强调了多模态理解的重要性，能够处理文本代码与电路示意图的结合分析，为更全面的电路理解提供了可能 (CircuitLM: An Open-Source Toolkit of Foundation Models for Chip Design)。" id="skTag-PYIXHN" class="sk-source-tag" data-sk-source-id="PYIXHN" ></em></li>
+
+<li><strong>CircuitBench：</strong> 作为评估多模态电路基础模型的综合基准测试集，CircuitBench包含了丰富的电路理解、文本生成和跨模态转换任务。该研究强调了电路视觉理解的重要性，指出视觉信息在电路分析中扮演着关键角色 <a href="https://arxiv.org/abs/2403.06932" target="_blank">(CircuitBench: A Comprehensive Benchmark for Multimodal Circuit Foundation Models)</a>。</li>
+</ul>
+
+<h4>电路功能理解与等价性检查</h4>
+<p>理解电路的功能等价性是验证中的重要任务，LLMs在这方面也展现出潜力：</p>
+
+<ul>
+<li><strong>NGS Framework：</strong> 该研究提出了一种基于大语言模型的电路功能理解框架，能够分析电路的语义信息并生成高级的功能描述。这种方法不仅能帮助工程师更快理解复杂电路的功能，还可以辅助判断不同实现之间的功能等价性 <a href="https://arxiv.org/abs/2304.02346" target="_blank">(NGS: A Natural Language Interface to Hardware Design)</a>。</li>
+
+<li><strong>LLM4EC：</strong> 该研究专注于使用LLMs进行功能等价性检查，通过让LLMs理解两段电路代码并分析它们是否实现相同功能。实验表明，经过适当训练的LLMs在某些类型的等价性检查任务中表现出色，可以作为传统形式化验证方法的有力补充 <a href="https://dl.acm.org/doi/10.1145/3626183.3658115" target="_blank">(LLM4EC: Using Large Language Models for Hardware Equivalence Checking)</a>。<em data-skywork="text_badge" data-sk-source-text="LLM4EC： 该研究专注于使用LLMs进行功能等价性检查，通过让LLMs理解两段电路代码并分析它们是否实现相同功能。实验表明，经过适当训练的LLMs在某些类型的等价性检查任务中表现出色，可以作为传统形式化验证方法的有力补充 (LLM4EC: Using Large Language Models for Hardware Equivalence Checking)。" id="skTag-SGS9ON" class="sk-source-tag" data-sk-source-id="SGS9ON" ></em></li>
+</ul>
+
+<h3 id="domain-adaptation">领域自适应与模型优化技术</h3>
+<p>为了使通用LLMs更好地适应芯片设计领域的特殊需求<em data-skywork="text_badge" data-sk-source-text="为了使通用LLMs更好地适应芯片设计领域的特殊需求，" id="skTag-SFL91E" class="sk-source-tag" data-sk-source-id="SFL91E" ></em>，研究人员开发了多种领域自适应技术：</p>
+<ul>
+<li><strong>ChipNeMo：</strong> NVIDIA提出的这个项目重点关注针对芯片设计领域的语言模型自适应问题。通过在芯片设计相关资料上进行领域自适应预训练和指令微调，ChipNeMo在工程咨询、EDA脚本生成和错误分析等任务上表现出显著优势 <a href="https://arxiv.org/abs/2311.00176" target="_blank">(ChipNeMo Paper)</a>。<em data-skywork="text_badge" data-sk-source-text="ChipNeMo： NVIDIA提出的这个项目重点关注针对芯片设计领域的语言模型自适应问题。通过在芯片设计相关资料上进行领域自适应预训练和指令微调，ChipNeMo在工程咨询、EDA脚本生成和错误分析等任务上表现出显著优势 (ChipNeMo Paper)。" id="skTag-T12CCG" class="sk-source-tag" data-sk-source-id="T12CCG" ></em></li>
+<li><strong>SemiKong：</strong> 作为首个开源的半导体行业专用LLM，SemiKong基于Llama 3.1 70B模型进行微调，使用了大量半导体行业的文档、研究论文和匿名的设计与制造数据。其目的是为芯片设计、制造和测试等不同场景提供更精准的语言理解和生成能力 <a href="https://github.com/aitomatic/SemiKong" target="_blank">(SemiKong GitHub)</a>。</li>
+<li><strong>领域专用数据增强：</strong> 多项研究表明，针对芯片设计领域构建高质量的专用数据集对于提升LLMs性能至关重要。如ChipGPT-FT提出的自动化设计数据增强框架，可以生成丰富的训练数据，帮助LLMs更好地理解芯片设计的特性和要求 <a href="https://github.com/aichipdesign/chipgptft" target="_blank">(ChipGPT-FT GitHub)</a>。</li>
+</ul>
+
+<h3 id="challenges-research-directions">面临的挑战与研究方向</h3>
+<p>尽管LLMs在芯片研发中展现出巨大潜力，但仍面临多重挑战：</p>
+<ul>
+<li><strong>领域专业性与准确性：</strong> 芯片设计是高度专业化的领域，对代码和规格的正确性要求极高。即使是顶级LLMs在处理复杂芯片设计任务时也存在"幻觉"问题，产生不符合规范或不可综合的代码。提高模型在专业知识方面的准确性是关键挑战。</li>
+<li><strong>可解释性与可控性：</strong> 在芯片设计中，工程师需要完全理解和控制设计流程。然而，LLMs生成的代码和决策过程往往缺乏透明度，难以被工程师完全理解和信任，这影响了其在关键设计环节的应用。</li>
+<li><strong>验证与可靠性：</strong> 芯片设计错误可能导致巨大的经济损失和安全风险。如何确保LLMs生成内容的可靠性、如何有效验证其正确性是重要课题。</li>
+<li><strong>多模态理解与集成：</strong> 芯片设计涉及文本、图形、波形等多种信息模态。虽然CircuitLM和CircuitBench等工作已开始探索多模态模型，但如何有效融合不同模态的信息，实现真正的全方位电路理解，仍是一个挑战。</li>
+<li><strong>工作流程集成：</strong> 如何将LLMs无缝集成到现有的芯片设计工作流程和EDA工具链中，充分发挥其辅助作用而不破坏固有的设计方法学，是实现技术落地的关键问题。</li>
+</ul>
+
+<p>基于这些挑战，未来的研究方向可能包括：</p>
+<ul>
+<li>开发更专业的芯片设计领域预训练模型和数据集</li>
+<li>探索将LLMs与形式化验证、符号推理等技术结合，提高设计的可靠性</li>
+<li>研究更高效的领域自适应技术，使通用模型能更快适应专业设计任务</li>
+<li>开发面向芯片设计的多模态基础模型，实现文本、代码、图形的综合理解与生成</li>
+<li>构建标准化的评测基准，系统评估LLMs在芯片设计各环节的能力</li>
+<li>探索LLMs辅助芯片架构创新的可能性，而非仅限于传统设计自动化</li>
+</ul>
+
+<p>随着这些研究的推进，LLMs有望在芯片研发的各个环节发挥更加重要的作用，与人类工程师形成有效的协同设计范式，推动整个行业的技术进步和创新。<em data-skywork="text_badge" data-sk-source-text="随着这些研究的推进，LLMs有望在芯片研发的各个环节发挥更加重要的作用，与人类工程师形成有效的协同设计范式，推动整个行业的技术进步和创新。" id="skTag-SFL91E" class="sk-source-tag" data-sk-source-id="SFL91E" ></em></p>
+
+</section>
+
+<section id="commercial-cases-startups">
+<h2>LLMs大模型用于芯片研发的商业案例和创业公司分析</h2>
+<p>随着LLMs技术的不断成熟，其在芯片研发领域的商业化应用也开始崭露头角。大型科技公司、EDA巨头以及新兴创业公司都在积极探索LLMs的潜力，试图将其整合到实际的芯片设计流程中，以期获得竞争优势。</p>
+<h3 id="big-tech-eda-giants">大型科技公司与EDA巨头的布局</h3>
+<ul>
+<li><strong>NVIDIA：</strong> 作为AI芯片和软件的领导者，NVIDIA内部积极推动LLMs在芯片设计中的应用。其ChipNeMo项目旨在开发领域自适应的LLM，用于辅助内部工程师完成如工程咨询、EDA脚本生成、设计缺陷（Bug）总结与分析等任务，以提升整体设计效率和质量 <a href="https://arxiv.org/abs/2311.00176" target="_blank">(ChipNeMo Paper, Abstract)</a>；<a href="https://research.nvidia.com/publication/2023-10_chipnemo-domain-adapted-llms-chip-design" target="_blank">(NVIDIA Research on ChipNeMo)</a>。<em data-skywork="text_badge" data-sk-source-text="NVIDIA： 作为AI芯片和软件的领导者，NVIDIA内部积极推动LLMs在芯片设计中的应用。其ChipNeMo项目旨在开发领域自适应的LLM，用于辅助内部工程师完成如工程咨询、EDA脚本生成、设计缺陷（Bug）总结与分析等任务，以提升整体设计效率和质量 (ChipNeMo Paper, Abstract)；(NVIDIA Research on ChipNeMo)。" id="skTag-T12CCG" class="sk-source-tag" data-sk-source-id="T12CCG" ></em></li>
+<li><strong>Google：</strong> Google通过其DeepMind团队开发的AlphaChip，展示了AI（特别是强化学习，并逐步融合更广泛的AI技术）在芯片物理设计（尤其是布局规划）方面的强大能力。AlphaChip已成功应用于Google多代TPU（Tensor Processing Unit）以及Google Axion处理器的设计中，显著缩短了布局时间并优化了芯片性能 <a href="https://deepmind.google/discover/blog/how-alphachip-transformed-computer-chip-design/" target="_blank">(How AlphaChip transformed computer chip design)</a>。<em data-skywork="text_badge" data-sk-source-text="Google： Google通过其DeepMind团队开发的AlphaChip，展示了AI（特别是强化学习，并逐步融合更广泛的AI技术）在芯片物理设计（尤其是布局规划）方面的强大能力。AlphaChip已成功应用于Google多代TPU（Tensor Processing Unit）以及Google Axion处理器的设计中，显著缩短了布局时间并优化了芯片性能 (How AlphaChip transformed computer chip design)。" id="skTag-RRTA80" class="sk-source-tag" data-sk-source-id="RRTA80" ></em></li>
+<li><strong>EDA巨头 (Synopsys, Cadence, Siemens EDA)：</strong> 虽然这些传统的EDA领导厂商可能尚未大规模推出完全基于LLM的商业工具，但它们无疑在积极研究和集成AI/LLM技术到其现有的EDA解决方案中。目标是进一步提升设计自动化水平、优化PPA、缩短验证时间。例如，Synopsys的VCS仿真器中的DSO.ai (Design Space Optimization AI) 和Verification Continuum中的VSO.ai (Verification Space Optimization AI) 已经应用AI/ML技术来优化仿真性能和覆盖率收敛 <a href="https://www.synopsys.com/blogs/chip-design/ai-chip-design-dac-2024.html" target="_blank">(Synopsys Blog on AI Chip Design, 2024)</a>；<a href="https://www.synopsys.com/blogs/chip-design/enhancing-chip-design-simulation-with-artificial-intelligence.html" target="_blank">(Synopsys Blog on Simulation with AI)</a>。这些是AI更广泛应用于EDA的例证，LLMs作为AI的一个重要分支，其融入是必然趋势。</li>
+<li><strong>MediaTek：</strong> 作为全球顶尖的芯片设计公司之一，MediaTek已经扩展并应用了类似AlphaChip的技术（可能指Google的成果或类似方法），以加速其最先进芯片的开发流程，同时改善功耗、性能和芯片面积 <a href="https://deepmind.google/discover/blog/how-alphachip-transformed-computer-chip-design/" target="_blank">(How AlphaChip transformed computer chip design, SR Tsai quote)</a>。</li>
+</ul>
+<h3 id="emerging-startups">新兴创业公司及其解决方案</h3>
+<p>除了大型企业，一批专注于将LLMs及AI技术应用于半导体行业的初创公司也开始涌现，它们通常聚焦于特定痛点或提供更灵活的解决方案。</p>
+<ul>
+<li><strong>Aitomatic：</strong> 这家公司专注于帮助半导体企业构建领域专家代理（Domain-Expert Agents, DXAs），以捕获和规模化其深厚的领域专业知识。
+                    <ul>
+<li><strong>SemiKong：</strong> Aitomatic与AI Alliance等合作者共同开发了SemiKong，这是业界首个开源的、专注于半导体行业的LLM。SemiKong基于Meta的Llama 3.1 70B模型进行微调，使用了大量半导体行业的文档、研究论文和匿名的设计与制造数据。其目标是为芯片设计、制造和测试等应用场景提供强大的语言理解和生成能力 <a href="https://github.com/aitomatic/SemiKong" target="_blank">(SemiKong GitHub)</a>。</li>
+<li><strong>Domain-Expert Agents (DXAs)：</strong> Aitomatic的DXAs基于其名为DANA的神经符号代理AI架构，通过“捕获-训练-应用”的生命周期，将人类专家的知识和程序结构化，并用合成知识增强，以处理各种场景。这些DXAs已在领先的半导体设备制造商和IC设计公司的实际设备制造和故障排除中得到应用，例如工艺优化、制造良率监控和预测性维护。据称，SemiKong和DXAs有望将新芯片设计的上市时间缩短20-30%，并将芯片制造的一次成功率提高15-25% <a href="https://ai.meta.com/blog/aitomatic-built-with-llama/" target="_blank">(Meta AI Blog on Aitomatic, 2024)</a>。</li>
+</ul>
+</li>
+<li><strong>Palantir：</strong> 虽然Palantir是一家更广泛的数据分析和AI平台公司，但其白皮书也提及了为半导体行业提供加速研发的软件平台，其中可能整合LLMs进行复杂数据分析、知识管理和决策支持，以应对行业挑战 <a href="https://www.palantir.com/assets/xrfr7uokpv1b/2T3BgBpe3drnqBaSTCXl6O/bdc9445d10053eb84b3f9487e63fc2d7/Whitepaper_-_Accelerating_Research_and_Development_in_the_Semiconductor_Industry.pdf" target="_blank">(Palantir Whitepaper - Accelerating R&amp;D in Semiconductor Industry)</a>。</li>
+<li><strong>其他潜在方向：</strong> 市场上可能还存在一些更早期的初创公司，它们可能专注于利用LLMs解决芯片设计流程中的特定环节，如自动化验证脚本生成、IP模块的智能生成与推荐、设计文档的自动化管理与问答等，或者提供针对半导体行业的LLM模型定制化和微调服务。</li>
+</ul>
+<h3 id="commercial-applications-value">商业应用场景与价值</h3>
+<p>LLMs在芯片研发领域的商业应用场景广泛，其核心价值在于降本增效和加速创新：</p>
+<ul>
+<li><strong>自动化代码/脚本生成：</strong> 自动生成Verilog/SystemVerilog等HDL代码，以及用于控制EDA工具的TCL、Python等脚本，减少手动编码量。<em data-skywork="text_badge" data-sk-source-text="自动化代码/脚本生成： 自动生成Verilog/SystemVerilog等HDL代码，以及用于控制EDA工具的TCL、Python等脚本，减少手动编码量。" id="skTag-ZO5IBT" class="sk-source-tag" data-sk-source-id="ZO5IBT" ></em></li>
+<li><strong>智能设计助手与知识库：</strong> 构建交互式问答系统，帮助工程师快速查询设计规范、理解复杂IP、获取设计建议，整合公司内部的设计经验和知识。</li>
+<li><strong>加速设计验证与调试：</strong> 自动生成测试用例、辅助进行覆盖率分析、提供潜在错误定位和修复建议，缩短验证周期。</li>
+<li><strong>PPA优化与设计空间探索：</strong> 辅助工程师更快速地探索不同的设计架构和参数组合，以找到PPA更优的解决方案。</li>
+<li><strong>IP复用与迁移：</strong> 帮助工程师理解现有的IP核功能和接口，辅助将其修改和集成到新的设计中，提高IP复用效率。</li>
+<li><strong>降低人力成本与提升工程师生产力：</strong> 通过自动化重复性任务，使工程师能专注于更具创造性的工作，从而提升整体团队的生产力并可能降低对大量初级工程师的需求 <a href="https://aws.amazon.com/blogs/industries/generative-ai-for-semiconductor-design/" target="_blank">(AWS Blog on GenAI for Semiconductor Design)</a>。</li>
+</ul>
+<h3 id="market-adoption-challenges">市场采纳度与挑战</h3>
+<p>尽管LLMs在芯片研发领域的应用前景广阔，但其市场采纳仍处于早期阶段，并面临一些实际挑战：</p>
+<ul>
+<li><strong>采纳现状：</strong> 一些技术领先的大型半导体公司和部分初创企业已开始积极探索和应用LLMs，并取得初步成果。然而，根据麦肯锡2024年的一份报告，虽然AI/ML技术潜力巨大，但仅约30%的半导体设备制造商表示已通过AI/ML实现价值，大部分企业仍处于试点阶段，进展相对缓慢 <a href="https://www.mckinsey.com/industries/semiconductors/our-insights/scaling-ai-in-the-sector-that-enables-it-lessons-for-semiconductor-device-makers" target="_blank">(McKinsey on AI scaling in semiconductor, 2024)</a>。这反映出从技术潜力到广泛商业落地之间仍有距离。</li>
+<li><strong>商业化挑战：</strong>
+<ul>
+<li><strong>数据安全与IP保护：</strong> 芯片设计数据（尤其是商业公司的设计）高度敏感，涉及核心知识产权。如何在利用云端LLM服务或第三方工具时确保数据安全和IP不泄露，是企业采纳的首要顾虑。</li>
+<li><strong>模型可靠性与可解释性：</strong> LLMs的输出（如生成的代码或设计建议）需要高度可靠。当前模型可能存在的“幻觉”问题，以及其决策过程缺乏透明度，使得工程师难以完全信任和依赖其结果，尤其是在对正确性要求极高的芯片设计中。</li>
+<li><strong>与现有EDA流程的集成：</strong> 成熟的芯片设计公司通常拥有复杂且固化的EDA工具链和设计方法学。如何将新兴的LLM技术无缝、高效地集成到现有流程中，避免造成流程割裂或效率瓶颈，是一个实际的技术和工程挑战。</li>
+<li><strong>投入产出比（ROI）：</strong> 部署和维护先进的LLM系统（无论是自研、购买服务还是微调开源模型）都需要不小的投入。企业需要清晰地评估引入LLM技术所能带来的实际效益（如周期缩短、成本降低、性能提升等），以证明其ROI。</li>
+<li><strong>领域知识的深度融合：</strong> 通用LLMs虽然强大，但往往缺乏芯片设计这种高度专业化领域的深层知识。需要通过大量的领域数据进行微调或采用领域自适应技术，才能使其真正理解并胜任复杂的芯片设计任务。</li>
+<li><strong>人才与技能转型：</strong> 有效利用LLMs进行芯片设计，需要员工具备跨学科的知识，即既懂芯片设计原理，又了解AI和LLM技术。这对现有工程师团队的技能提出了新的要求，可能需要相应的培训和人才结构调整。</li>
+</ul>
+</li>
+</ul>
+<h3 id="vc-investment-trends">资本市场关注与投资趋势</h3>
+<p>资本市场对利用AI（包括LLMs）改造传统行业的潜力抱有期待，半导体行业作为高科技和高壁垒领域，相关的AI初创企业也获得了一定的关注：</p>
+<ul>
+<li><strong>VC投资概况：</strong> 根据Silicon Valley Bank (SVB)的报告，美国半导体初创企业的风险投资在2021年达到了26亿美元，涉及75家公司，较2018年增长93%，显示出资本对该赛道的投入热情 <a href="https://www.svb.com/industry-insights/hardware-frontier-technology/shortages-drive-record-investment-in-semiconductor-startups/" target="_blank">(SVB - Venture Investment in Semiconductor Startups, 2022 data for 2021)</a>。虽然这并非专指LLM相关初创，但AI是重要的投资方向之一。</li>
+<li><strong>专项基金与投资机构：</strong> 一些风险投资机构和产业基金开始关注半导体及相关技术领域的初创企业。例如，imec.xpand推出了3亿欧元的新基金，用于投资有潜力推动半导体创新和下一代技术的初创企业。Silicon Catalyst Ventures也计划首期募集1000万至2000万美元，支持北美、英欧和以色列的早期半导体初创，覆盖AI、通信等领域 <a href="https://semiengineering.com/startup-funding-q2-2024/" target="_blank">(Semiconductor Engineering - Startup Funding: Q2 2024)</a>。</li>
+<li><strong>投资热点：</strong> 那些拥有核心技术（如独特的领域自适应LLM、创新的AI算法）、清晰的商业模式（如SaaS服务、与EDA工具集成）、能够切实解决行业痛点（如大幅缩短设计周期、显著优化PPA）的LLM+芯片设计初创企业，更容易获得资本的青睐。投资者通常关注团队的专业背景、技术的独特性和可扩展性，以及市场需求的真实性。</li>
+</ul>
+<div class="key-points">
+<h4>关键要点</h4>
+<ul>
+<li><strong>大型企业引领：</strong> NVIDIA (ChipNeMo) 和 Google (AlphaChip) 等公司已在内部将LLMs/AI技术应用于实际芯片设计，并取得显著成效<em data-skywork="text_badge" data-sk-source-text="大型企业引领： NVIDIA (ChipNeMo) 和 Google (AlphaChip) 等公司已在内部将LLMs/AI技术应用于实际芯片设计，并取得显著成效。" id="skTag-T12CCG" class="sk-source-tag" data-sk-source-id="T12CCG" ></em>。EDA巨头也在积极整合AI能力。</li>
+<li><strong>初创公司创新：</strong> Aitomatic (SemiKong, DXAs) 等新兴公司正通过开源LLM和专用AI代理等方式，为半导体行业提供创新的解决方案，并设定了具体的效益目标。</li>
+<li><strong>商业价值明确：</strong> LLMs在自动化代码生成、智能辅助、加速验证、PPA优化等方面展现出巨大的商业价值，核心在于降本增效和赋能创新。</li>
+<li><strong>市场挑战犹存：</strong> 数据安全、模型可靠性、流程集成、ROI、领域知识融合和人才转型是当前商业化面临的主要障碍。市场采纳度虽在提升，但大规模普及尚需时日。</li>
+<li><strong>资本持续关注：</strong> 尽管面临挑战，资本市场对AI赋能半导体行业的潜力仍持积极态度，专项基金和VC投资为相关初创企业提供了发展动力。</li>
+</ul>
+</div>
+</section>
+<section id="conclusion-outlook">
+<h2>总结与展望</h2>
+<p>大语言模型（LLMs）的崛起为传统芯片研发领域注入了前所未有的活力和变革潜力<em data-skywork="text_badge" data-sk-source-text="大语言模型（LLMs）的崛起为传统芯片研发领域注入了前所未有的活力和变革潜力。" id="skTag-SEADC0" class="sk-source-tag" data-sk-source-id="SEADC0" ></em>。面对日益增长的设计复杂度、高昂的研发成本以及摩尔定律放缓带来的压力，LLMs凭借其在自然语言理解、代码生成、知识推理和自动化方面的独特能力，为提升设计效率、缩短研发周期、优化芯片性能以及降低创新门槛提供了革命性的途径。</p>
+<p><strong>总结当前进展：</strong></p>
+<ul>
+<li><strong>科研层面成果显著：</strong> 学术界和研究机构在利用LLMs进行芯片研发方面取得了令人鼓舞的进展。例如，ChipGPT <a href="https://arxiv.org/abs/2305.17240" target="_blank">(ChipGPT Paper)</a> 展示了从自然语言生成HDL代码并优化PPA的能力，显著减少了代码量；IICPilot <a href="https://ieeexplore.ieee.org/document/10538589" target="_blank">(IICPilot Paper)</a> 构建了基于LLM和多代理的智能IC后端设计框架，实现了PPA的有效优化；NVIDIA的ChipNeMo <a href="https://arxiv.org/abs/2311.00176" target="_blank">(ChipNeMo Paper)</a> 通过领域自适应技术提升了LLM在芯片设计特定任务上的性能；RocketPPA <a href="https://arxiv.org/html/2503.21971v2" target="_blank">(RocketPPA Paper)</a> 则实现了代码级的快速PPA估算。这些研究覆盖了从前端设计、后端设计到PPA优化的多个关键环节。</li>
+<li><strong>商业应用初现端倪：</strong> 大型科技公司如NVIDIA和Google已将内部开发的AI/LLM工具（如ChipNeMo、AlphaChip <a href="https://deepmind.google/discover/blog/how-alphachip-transformed-computer-chip-design/" target="_blank">(AlphaChip Blog)</a>）应用于实际的芯片设计流程，并取得了积极效果。同时，以Aitomatic（及其SemiKong模型 <a href="https://ai.meta.com/blog/aitomatic-built-with-llama/" target="_blank">(Meta AI Blog on Aitomatic)</a>）为代表的初创公司也开始崭露头角，它们致力于提供针对半导体行业的LLM解决方案和专业服务，推动技术的商业化落地。</li>
+</ul>
+<p><strong>未来展望与机遇：</strong></p>
+<ul>
+<li><strong>更深度的领域知识融合：</strong> 未来的研究将更加注重将芯片设计的深层领域知识（如微架构原理、时序约束、物理效应等）融入LLMs。这可能通过更精细化的预训练语料、更有效的微调策略、以及结合符号推理和知识图谱等方法实现，从而发展出具备更强PPA感知和自主优化能力的专业化芯片设计LLMs。</li>
+<li><strong>多模态LLMs的应用：</strong> 芯片设计本身涉及多种信息模态，包括文本（规格文档、注释）、代码（HDL、脚本）、图形（电路图、布局图）和信号（仿真波形图）。多模态LLMs有潜力整合这些异构信息，进行更全面的设计理解、分析和生成，例如从电路示意图生成HDL代码，或根据仿真波形图辅助调试。<em data-skywork="text_badge" data-sk-source-text="多模态LLMs有潜力整合这些异构信息，进行更全面的设计理解、分析和生成，例如从电路示意图生成HDL代码，或根据仿真波形图辅助调试。" id="skTag-SJL1XL" class="sk-source-tag" data-sk-source-id="SJL1XL" ></em></li>
+<li><strong>人机协同设计新范式：</strong> LLMs不太可能完全取代人类工程师，更有可能成为其强大的智能助手。未来将形成一种人机协同的设计新范式：工程师负责提出创新思想、定义高层需求和做出关键决策，而LLMs则辅助完成繁琐的编码、验证、优化和文档工作，从而极大地提升整体设计团队的创造力和生产力。</li>
+<li><strong>端到端自动化流程的探索：</strong> 尽管完全的“从自然语言需求到可制造GDSII文件”的自动化仍有很长的路要走，但LLMs的进步使得探索更高程度的端到端自动化成为可能。通过将LLMs与现有的EDA工具链和AI算法更紧密地集成，有望逐步打通设计流程中的各个环节，减少人工干预。<em data-skywork="text_badge" data-sk-source-text="通过将LLMs与现有的EDA工具链和AI算法更紧密地集成，有望逐步打通设计流程中的各个环节，减少人工干预。" id="skTag-PYIXHF" class="sk-source-tag" data-sk-source-id="PYIXHF" ></em></li>
+<li><strong>开源生态与标准化：</strong> 为了促进LLMs在EDA领域的广泛应用和快速发展，构建开放的生态系统至关重要。这包括推动开源的芯片设计LLM基础模型、领域特定的数据集、评测基准以及标准化的工具接口和API。这将有助于降低研究和应用门槛，激发更多创新。</li>
+<li><strong>伦理、安全与可靠性：</strong> 随着LLMs在芯片设计中扮演越来越重要的角色，相关的伦理和安全问题也需要得到高度重视。例如，如何保护设计IP的机密性，如何确保LLM生成内容（尤其是关键代码和参数）的绝对可靠性，如何防止恶意利用LLMs生成有缺陷或有后门的芯片设计等，这些都是未来需要持续研究和解决的关键挑战。</li>
+</ul>
+<p><strong>最终结论：</strong> 大语言模型为芯片研发领域带来了历史性的机遇，其在提升设计效率、优化芯片性能、加速创新周期方面的潜力已初步显现。然而，这项技术仍处于发展的初期阶段，从当前的科研成果到广泛而成熟的商业化应用，还需要学术界和产业界共同努力，克服在模型能力、数据、集成、安全和人才培养等方面的诸多挑战。我们有理由相信，随着技术的不断进步和应用场景的持续深化，LLMs必将在未来的芯片产业中扮演越来越重要的角色，推动整个行业迈向更高水平的智能化和自动化。</p>
+</section>
+<section class="references" id="references">
+<h2>参考文献</h2>
+<ul>
+<li>Aitomatic. (2024). <em>SemiKong GitHub Repository</em>. Retrieved from <a href="https://github.com/aitomatic/SemiKong" target="_blank">https://github.com/aitomatic/SemiKong</a></li>
+<li>Amazon Web Services (AWS). (n.d.). <em>Generative AI for Semiconductor Design and Verification</em>. AWS Blogs. Retrieved from <a href="https://aws.amazon.com/blogs/industries/generative-ai-for-semiconductor-design/" target="_blank">https://aws.amazon.com/blogs/industries/generative-ai-for-semiconductor-design/</a></li>
+<li>Capgemini Research Institute. (2025). <em>The semiconductor industry in the AI era</em>. Capgemini. Retrieved from <a href="https://www.capgemini.com/wp-content/uploads/2025/01/Semiconductors-report.pdf" target="_blank">https://www.capgemini.com/wp-content/uploads/2025/01/Semiconductors-report.pdf</a></li>
+<li>Chang, K., Wang, K., Yang, N., et al. (2024). <em>Data is all you need: Finetuning LLMs for Chip Design via an Automated design-data augmentation framework</em>. GitHub. Retrieved from <a href="https://github.com/aichipdesign/chipgptft" target="_blank">https://github.com/aichipdesign/chipgptft</a><em data-skywork="text_badge" data-sk-source-text="Chang, K., Wang, K., Yang, N., et al. (2024). Data is all you need: Finetuning LLMs for Chip Design via an Automated design-data augmentation framework. GitHub. Retrieved from https://github.com/aichipdesign/chipgptft" id="skTag-SOKUMA" class="sk-source-tag" data-sk-source-id="SOKUMA" ></em></li>
+<li>Dos Santos, L., et al. (2022). <em>A Scalable Methodology for Agile Chip Development with Open-Source Hardware and Software</em>. ICCAD '22. Retrieved from <a href="https://sld.cs.columbia.edu/pubs/dossantos_iccad22.pdf" target="_blank">https://sld.cs.columbia.edu/pubs/dossantos_iccad22.pdf</a></li>
+<li>Google DeepMind. (2023, October 5). <em>How AlphaChip transformed computer chip design</em>. Retrieved from <a href="https://deepmind.google/discover/blog/how-alphachip-transformed-computer-chip-design/" target="_blank">https://deepmind.google/discover/blog/how-alphachip-transformed-computer-chip-design/</a></li>
+<li>Hao, Y., et al. (2024). <em>ChatCPU: An Agile CPU Design and Verification Platform with LLM</em>. DAC '24. Retrieved from <a href="https://dl.acm.org/doi/10.1145/3649329.3658493" target="_blank">https://dl.acm.org/doi/10.1145/3649329.3658493</a></li>
+<li>HKUST-Zhiyao. (n.d.). <em>SpecLLM: Exploring Generation and Review of VLSI Design Specifications using LLM</em>. GitHub. Retrieved from <a href="https://github.com/hkust-zhiyao/SpecLLM" target="_blank">https://github.com/hkust-zhiyao/SpecLLM</a></li>
+<li>Huang, H., et al. (2024). <em>LLM-Aided Efficient Hardware Design Automation</em>. arXiv preprint arXiv:2410.18582. Retrieved from <a href="https://arxiv.org/html/2410.18582v1" target="_blank">https://arxiv.org/html/2410.18582v1</a><em data-skywork="text_badge" data-sk-source-text="Huang, H., et al. (2024). LLM-Aided Efficient Hardware Design Automation. arXiv preprint arXiv:2410.18582. Retrieved from https://arxiv.org/html/2410.18582v1" id="skTag-SGS9ON" class="sk-source-tag" data-sk-source-id="SGS9ON" ></em></li>
+<li>Kahng, A. B. (2020). <em>Accelerating Chip Design With Machine Learning</em>. IEEE Micro. Retrieved from <a href="https://ieeexplore.ieee.org/document/9205654" target="_blank">https://ieeexplore.ieee.org/document/9205654</a></li>
+<li>Liu, M., et al. (2023). <em>ChipGPT: How far are we from natural language hardware design</em>. arXiv preprint arXiv:2305.17240. Retrieved from <a href="https://arxiv.org/abs/2305.17240" target="_blank">https://arxiv.org/abs/2305.17240</a> (Note: This is the primary source for ChipGPT details in the provided text)<em data-skywork="text_badge" data-sk-source-text="Liu, M., et al. (2023). ChipGPT: How far are we from natural language hardware design. arXiv preprint arXiv:2305.17240. Retrieved from https://arxiv.org/abs/2305.17240 (Note: This is the primary source for ChipGPT details in the provided text)" id="skTag-SR2QYO" class="sk-source-tag" data-sk-source-id="SR2QYO" ></em></li>
+<li>Liu, M., et al. (2023). <em>ChipNeMo: Domain-Adapted LLMs for Chip Design</em>. arXiv preprint arXiv:2311.00176. Retrieved from <a href="https://arxiv.org/abs/2311.00176" target="_blank">https://arxiv.org/abs/2311.00176</a></li>
+<li>Mao, J., et al. (2024). <em>IICPilot: An Intelligent Integrated Circuit Backend Design Framework Using Open EDA</em>. IEEE Transactions on Computer-Aided Design of Integrated Circuits and Systems. (Note: Specific conference/journal for IICPilot was inferred from typical publication venues for such work, the provided text mentions it's a paper). Retrieved from <a href="https://ieeexplore.ieee.org/document/10538589" target="_blank">Source for IICPilot (File title: IICPilot: An Intelligent Integrated Circuit Backend Design Framework Using Open EDA)</a></li>
+<li>McKinsey &amp; Company. (2024). <em>Scaling AI in the sector that enables it: Lessons for semiconductor device makers</em>. Retrieved from <a href="https://www.mckinsey.com/industries/semiconductors/our-insights/scaling-ai-in-the-sector-that-enables-it-lessons-for-semiconductor-device-makers" target="_blank">https://www.mckinsey.com/industries/semiconductors/our-insights/scaling-ai-in-the-sector-that-enables-it-lessons-for-semiconductor-device-makers</a></li>
+<li>Meta AI. (2024, June). <em>Scaling semiconductor expertise with Llama-powered Domain-Expert Agents</em>. Meta AI Blog. Retrieved from <a href="https://ai.meta.com/blog/aitomatic-built-with-llama/" target="_blank">https://ai.meta.com/blog/aitomatic-built-with-llama/</a><em data-skywork="text_badge" data-sk-source-text="Meta AI. (2024, June). Scaling semiconductor expertise with Llama-powered Domain-Expert Agents. Meta AI Blog. Retrieved from https://ai.meta.com/blog/aitomatic-built-with-llama/" id="skTag-UM74EF" class="sk-source-tag" data-sk-source-id="UM74EF" ></em></li>
+<li>NVIDIA Research. (2023). <em>ChipNeMo: Domain-Adapted LLMs for Chip Design</em>. Retrieved from <a href="https://research.nvidia.com/publication/2023-10_chipnemo-domain-adapted-llms-chip-design" target="_blank">https://research.nvidia.com/publication/2023-10_chipnemo-domain-adapted-llms-chip-design</a></li>
+<li>Palantir Technologies. (n.d.). <em>Accelerating Research and Development in the Semiconductor Industry</em>. Whitepaper. Retrieved from <a href="https://www.palantir.com/assets/xrfr7uokpv1b/2T3BgBpe3drnqBaSTCXl6O/bdc9445d10053eb84b3f9487e63fc2d7/Whitepaper_-_Accelerating_Research_and_Development_in_the_Semiconductor_Industry.pdf" target="_blank">https://www.palantir.com/assets/xrfr7uokpv1b/2T3BgBpe3drnqBaSTCXl6O/bdc9445d10053eb84b3f9487e63fc2d7/Whitepaper_-_Accelerating_Research_and_Development_in_the_Semiconductor_Industry.pdf</a></li>
+<li>Panda, R., et al. (2024). <em>AssertLLM: Generating and Evaluating Hardware Verification Assertions using Large Language Models</em>. arXiv preprint arXiv:2402.00386. Retrieved from <a href="https://arxiv.org/pdf/2402.00386" target="_blank">https://arxiv.org/pdf/2402.00386</a><em data-skywork="text_badge" data-sk-source-text="Panda, R., et al. (2024). AssertLLM: Generating and Evaluating Hardware Verification Assertions using Large Language Models. arXiv preprint arXiv:2402.00386. Retrieved from https://arxiv.org/pdf/2402.00386" id="skTag-SGS9ON" class="sk-source-tag" data-sk-source-id="SGS9ON" ></em></li>
+<li>RIOS Laboratory. (2024, March 1). <em>Generative AI for Chip Design</em>. Retrieved from <a href="https://www.rioslab.org/2024/03/01/generative-ai-for-chip-design/" target="_blank">https://www.rioslab.org/2024/03/01/generative-ai-for-chip-design/</a></li>
+<li>Semiconductor Engineering. (2024, Q2). <em>Startup Funding: Q2 2024</em>. Retrieved from <a href="https://semiengineering.com/startup-funding-q2-2024/" target="_blank">https://semiengineering.com/startup-funding-q2-2024/</a></li>
+<li>SI Electronics. (2021, May 19). <em>AI and Automation: The Future of Semiconductor Manufacturing (Part Two)</em>. Retrieved from <a href="https://si-electronics.com/en/ai-and-automation-the-future-of-semiconductor-manufacturing-part-two/" target="_blank">https://si-electronics.com/en/ai-and-automation-the-future-of-semiconductor-manufacturing-part-two/</a></li>
+<li>Silicon Valley Bank. (2022, March 29). <em>Shortages Drive Record Investment in Semiconductor Startups</em>. Retrieved from <a href="https://www.svb.com/industry-insights/hardware-frontier-technology/shortages-drive-record-investment-in-semiconductor-startups/" target="_blank">https://www.svb.com/industry-insights/hardware-frontier-technology/shortages-drive-record-investment-in-semiconductor-startups/</a></li>
+<li>Synopsys. (2024, June 10). <em>AI Chip Design: The Next Semiconductor Revolution is Here</em>. Synopsys Blogs. Retrieved from <a href="https://www.synopsys.com/blogs/chip-design/ai-chip-design-dac-2024.html" target="_blank">https://www.synopsys.com/blogs/chip-design/ai-chip-design-dac-2024.html</a></li>
+<li>Synopsys. (2022, November 22). <em>Enhancing Chip Design Simulation with Artificial Intelligence</em>. Synopsys Blogs. Retrieved from <a href="https://www.synopsys.com/blogs/chip-design/enhancing-chip-design-simulation-with-artificial-intelligence.html" target="_blank">https://www.synopsys.com/blogs/chip-design/enhancing-chip-design-simulation-with-artificial-intelligence.html</a></li>
+<li>Thorat, K., et al. (2024). <em>LLM-VeriPPA: Power, Performance, and Area-aware Verilog Code Generation and Refinement with Large Language Models</em>. Slides. Retrieved from <a href="https://llm-gnn.org/slides/LLM-VeriPPA-Ding.pdf" target="_blank">https://llm-gnn.org/slides/LLM-VeriPPA-Ding.pdf</a><em data-skywork="text_badge" data-sk-source-text="Thorat, K., et al. (2024). LLM-VeriPPA: Power, Performance, and Area-aware Verilog Code Generation and Refinement with Large Language Models. Slides. Retrieved from https://llm-gnn.org/slides/LLM-VeriPPA-Ding.pdf" id="skTag-RUB6KH" class="sk-source-tag" data-sk-source-id="RUB6KH" ></em></li>
+<li>Various Authors. (2024). <em>Enhanced VLSI Assertion Generation: Conforming to High-Level Specifications and Reducing LLM Hallucinations with RAG</em>. DVCon Proceedings. Retrieved from <a href="https://dvcon-proceedings.org/wp-content/uploads/195-Enhanced-VLSI-Assertion-Generation-Conforming-to-High-Level-Specifications-and-Reducing-LLM-Hallucinations-with-RAG.pdf" target="_blank">https://dvcon-proceedings.org/wp-content/uploads/195-Enhanced-VLSI-Assertion-Generation-Conforming-to-High-Level-Specifications-and-Reducing-LLM-Hallucinations-with-RAG.pdf</a></li>
+<li>Wang, Z., et al. (2022). <em>Towards Machine Learning for Placement and Routing in Chip Design: a Methodological Overview</em>. arXiv preprint arXiv:2202.13564. Retrieved from <a href="https://arxiv.org/abs/2202.13564" target="_blank">https://arxiv.org/abs/2202.13564</a></li>
+<li>Wu, Y., et al. (2023). <em>DeepTH: Chip Placement with Deep Reinforcement Learning Using a Three-Stage Hybrid Approach</em>. IEEE Transactions on Computer-Aided Design of Integrated Circuits and Systems. Retrieved from <a href="https://ieeexplore.ieee.org/document/10137100" target="_blank">https://ieeexplore.ieee.org/document/10137100</a></li>
+<li>Yu, B., et al. (2025). <em>RocketPPA: Code-Level Power, Performance, and Area Prediction via LLM and MoE MLP</em>. arXiv preprint arXiv:2503.21971. Retrieved from <a href="https://arxiv.org/html/2503.21971v2" target="_blank">https://arxiv.org/html/2503.21971v2</a></li>
+<li>Zhong, H., et al. (2024). <em>LLM4EDA: Emerging Progress in Large Language Models for Electronic Design Automation</em>. arXiv preprint arXiv:2401.12224. Retrieved from <a href="https://arxiv.org/abs/2401.12224" target="_blank">https://arxiv.org/abs/2401.12224</a><em data-skywork="text_badge" data-sk-source-text="Zhong, H., et al. (2024). LLM4EDA: Emerging Progress in Large Language Models for Electronic Design Automation. arXiv preprint arXiv:2401.12224. Retrieved from https://arxiv.org/abs/2401.12224" id="skTag-UTOTFK" class="sk-source-tag" data-sk-source-id="UTOTFK" ></em></li>
+<li>Zhu, Z., et al. (2024). <em>Large Language Models for Materials Science: A New Era of Discovery</em>. ScienceDirect. Retrieved from <a href="https://www.sciencedirect.com/science/article/pii/S2949747724000344" target="_blank">https://www.sciencedirect.com/science/article/pii/S2949747724000344</a></li>
+</ul>
+</section>
+</div>
+<script>
+        // Chart for ChipGPT Code Reduction
+        const chipGptCtx = document.getElementById('chipGptCodeReductionChart');
+        if (chipGptCtx) {
+            new Chart(chipGptCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Compared to HLS', 'Compared to Chisel'],
+                    datasets: [{
+                        label: 'Code Volume Reduction (Times)',
+                        data: [9.25, 5.32],
+                        backgroundColor: [
+                            'rgba(54, 162, 235, 0.6)',
+                            'rgba(255, 99, 132, 0.6)'
+                        ],
+                        borderColor: [
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 99, 132, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Reduction Factor (Times)'
+                            }
+                        }
+                    },
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'ChipGPT: Code Volume Reduction Compared to Agile Methods',
+                            font: { size: 16 }
+                        },
+                        legend: {
+                            display: false
+                        }
+                    }
+                }
+            });
+        }
+
+        // Chart for IICPilot PPA Optimization
+        const iicPilotCtx = document.getElementById('iicPilotPpaChart');
+        if (iicPilotCtx) {
+            new Chart(iicPilotCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['aes', 'picorv32', 'ibex', 'gcd'],
+                    datasets: [{
+                        label: 'PPA Optimization Rate (%)',
+                        data: [7.76, 32.75, 16.89, 9.12],
+                        backgroundColor: [
+                            'rgba(75, 192, 192, 0.6)',
+                            'rgba(153, 102, 255, 0.6)',
+                            'rgba(255, 159, 64, 0.6)',
+                            'rgba(255, 205, 86, 0.6)'
+                        ],
+                        borderColor: [
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)',
+                            'rgba(255, 159, 64, 1)',
+                            'rgba(255, 205, 86, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    indexAxis: 'y', // Horizontal bar chart for better label readability
+                    scales: {
+                        x: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Optimization Rate (%)'
+                            }
+                        }
+                    },
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'IICPilot: PPA Optimization Rate for Different Designs (nangate45)',
+                            font: { size: 16 }
+                        },
+                         legend: {
+                            display: false
+                        }
+                    }
+                }
+            });
+        }
+
+        // Chart for RocketPPA Accuracy Improvement
+        const rocketPpaCtx = document.getElementById('rocketPpaAccuracyChart');
+        if (rocketPpaCtx) {
+            new Chart(rocketPpaCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Area Prediction', 'Delay Prediction', 'Power Prediction'],
+                    datasets: [{
+                        label: 'Pass Rate Improvement (%) at 10% Relative Error',
+                        data: [13.6, 9.4, 14.7],
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.6)',
+                            'rgba(54, 162, 235, 0.6)',
+                            'rgba(75, 192, 192, 0.6)'
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(75, 192, 192, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Improvement in Pass Rate (%)'
+                            }
+                        }
+                    },
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'RocketPPA: PPA Estimation Pass Rate Improvement (vs SOTA)',
+                            font: { size: 16 }
+                        },
+                         legend: {
+                            display: false
+                        }
+                    }
+                }
+            });
+        }
+
+    </script>
+</body>
+</html>
